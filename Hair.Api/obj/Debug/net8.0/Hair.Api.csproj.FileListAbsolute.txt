@@ -1,0 +1,293 @@
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\appsettings.json
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Api.exe
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Api.deps.json
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Api.runtimeconfig.json
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Api.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Api.pdb
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.AssemblyReference.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.AssemblyInfoInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.AssemblyInfo.cs
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.CoreCompileInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.Hair.Api.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.build.Hair.Api.props
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Hair.Api.props
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Hair.Api.props
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\scopedcss\bundle\Hair.Api.styles.css
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.Up2Date
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\refint\Hair.Api.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.pdb
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\Hair.Api.genruntimeconfig.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\obj\Debug\net8.0\ref\Hair.Api.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\MediatR.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Npgsql.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Application.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Infrastructure.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Application.pdb
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Infrastructure.pdb
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Api\bin\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\appsettings.json
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Api.exe
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Api.deps.json
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Api.runtimeconfig.json
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Api.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Api.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\MediatR.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Npgsql.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Application.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Infrastructure.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Application.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Infrastructure.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\bin\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.AssemblyReference.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.AssemblyInfoInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.AssemblyInfo.cs
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.CoreCompileInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.Hair.Api.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.build.Hair.Api.props
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Hair.Api.props
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Hair.Api.props
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\scopedcss\bundle\Hair.Api.styles.css
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.Up2Date
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\refint\Hair.Api.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\Hair.Api.genruntimeconfig.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Api\obj\Debug\net8.0\ref\Hair.Api.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\appsettings.Development.json
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\appsettings.json
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Api.exe
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Api.deps.json
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Api.runtimeconfig.json
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Api.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Api.pdb
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\FluentValidation.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\MediatR.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\MediatR.Contracts.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Npgsql.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Application.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Domain.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Infrastructure.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Application.pdb
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Infrastructure.pdb
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Hair.Domain.pdb
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.AssemblyReference.cache
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.GeneratedMSBuildEditorConfig.editorconfig
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.AssemblyInfoInputs.cache
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.AssemblyInfo.cs
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.CoreCompileInputs.cache
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.MvcApplicationPartsAssemblyInfo.cs
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.MvcApplicationPartsAssemblyInfo.cache
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\staticwebassets.build.json
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\staticwebassets.development.json
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.Hair.Api.Microsoft.AspNetCore.StaticWebAssets.props
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.build.Hair.Api.props
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Hair.Api.props
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Hair.Api.props
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\staticwebassets.pack.json
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\scopedcss\bundle\Hair.Api.styles.css
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.Up2Date
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.dll
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\refint\Hair.Api.dll
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.pdb
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.genruntimeconfig.cache
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\ref\Hair.Api.dll
+D:\BarberApp3\Hair.Api\obj\Debug\net8.0\Hair.Api.sourcelink.json
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Enums.NET.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Epoch.net.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\ColorTranslations.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\jose-jwt.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\StandardSocketsHttpHandler.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\System.Formats.Asn1.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\System.IO.Abstractions.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\System.IO.Pipelines.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\System.Text.Json.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\TestableIO.System.IO.Abstractions.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\TestableIO.System.IO.Abstractions.Wrappers.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Twilio.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Vonage.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\Yoh.Text.Json.NamingPolicies.dll
+D:\BarberApp3\Hair.Api\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\appsettings.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Api.exe
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Api.deps.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Api.runtimeconfig.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Api.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Api.pdb
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Enums.NET.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Epoch.net.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\ColorTranslations.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\jose-jwt.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\MediatR.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Npgsql.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\StandardSocketsHttpHandler.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\System.Formats.Asn1.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\System.IO.Abstractions.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\System.Text.Json.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\TestableIO.System.IO.Abstractions.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\TestableIO.System.IO.Abstractions.Wrappers.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Twilio.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Vonage.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Yoh.Text.Json.NamingPolicies.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Application.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Infrastructure.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Application.pdb
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Infrastructure.pdb
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.AssemblyReference.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.AssemblyInfoInputs.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.AssemblyInfo.cs
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.CoreCompileInputs.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.Hair.Api.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.build.Hair.Api.props
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Hair.Api.props
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Hair.Api.props
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\scopedcss\bundle\Hair.Api.styles.css
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.csproj.Up2Date
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\refint\Hair.Api.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.pdb
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.genruntimeconfig.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\ref\Hair.Api.dll

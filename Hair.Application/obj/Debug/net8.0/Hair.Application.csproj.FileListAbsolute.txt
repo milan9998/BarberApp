@@ -1,0 +1,61 @@
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\bin\Debug\net8.0\Hair.Application.deps.json
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\bin\Debug\net8.0\Hair.Application.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\bin\Debug\net8.0\Hair.Application.pdb
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\bin\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\bin\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\obj\Debug\net8.0\Hair.Application.csproj.AssemblyReference.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\obj\Debug\net8.0\Hair.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\obj\Debug\net8.0\Hair.Application.AssemblyInfoInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\obj\Debug\net8.0\Hair.Application.AssemblyInfo.cs
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\obj\Debug\net8.0\Hair.Application.csproj.CoreCompileInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\obj\Debug\net8.0\Hair.App.C332B505.Up2Date
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\obj\Debug\net8.0\Hair.Application.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\obj\Debug\net8.0\refint\Hair.Application.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\obj\Debug\net8.0\Hair.Application.pdb
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Application\obj\Debug\net8.0\ref\Hair.Application.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\bin\Debug\net8.0\Hair.Application.deps.json
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\bin\Debug\net8.0\Hair.Application.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\bin\Debug\net8.0\Hair.Application.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\bin\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\bin\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\obj\Debug\net8.0\Hair.Application.csproj.AssemblyReference.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\obj\Debug\net8.0\Hair.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\obj\Debug\net8.0\Hair.Application.AssemblyInfoInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\obj\Debug\net8.0\Hair.Application.AssemblyInfo.cs
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\obj\Debug\net8.0\Hair.Application.csproj.CoreCompileInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\obj\Debug\net8.0\Hair.App.C332B505.Up2Date
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\obj\Debug\net8.0\Hair.Application.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\obj\Debug\net8.0\refint\Hair.Application.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\obj\Debug\net8.0\Hair.Application.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Application\obj\Debug\net8.0\ref\Hair.Application.dll
+D:\BarberApp3\Hair.Application\bin\Debug\net8.0\Hair.Application.deps.json
+D:\BarberApp3\Hair.Application\bin\Debug\net8.0\Hair.Application.dll
+D:\BarberApp3\Hair.Application\bin\Debug\net8.0\Hair.Application.pdb
+D:\BarberApp3\Hair.Application\bin\Debug\net8.0\Hair.Domain.dll
+D:\BarberApp3\Hair.Application\bin\Debug\net8.0\Hair.Domain.pdb
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\Hair.Application.csproj.AssemblyReference.cache
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\Hair.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\Hair.Application.AssemblyInfoInputs.cache
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\Hair.Application.AssemblyInfo.cs
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\Hair.Application.csproj.CoreCompileInputs.cache
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\Hair.App.C332B505.Up2Date
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\Hair.Application.dll
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\refint\Hair.Application.dll
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\Hair.Application.pdb
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\ref\Hair.Application.dll
+D:\BarberApp3\Hair.Application\obj\Debug\net8.0\Hair.Application.sourcelink.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\bin\Debug\net8.0\Hair.Application.deps.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\bin\Debug\net8.0\Hair.Application.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\bin\Debug\net8.0\Hair.Application.pdb
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\bin\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\bin\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.Application.csproj.AssemblyReference.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.Application.AssemblyInfoInputs.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.Application.AssemblyInfo.cs
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.Application.csproj.CoreCompileInputs.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.App.C332B505.Up2Date
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.Application.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\refint\Hair.Application.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.Application.pdb
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\ref\Hair.Application.dll

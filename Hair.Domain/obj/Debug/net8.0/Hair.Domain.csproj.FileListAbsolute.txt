@@ -1,0 +1,49 @@
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\bin\Debug\net8.0\Hair.Domain.deps.json
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\bin\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\bin\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\obj\Debug\net8.0\Hair.Domain.csproj.AssemblyReference.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\obj\Debug\net8.0\Hair.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\obj\Debug\net8.0\Hair.Domain.AssemblyInfoInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\obj\Debug\net8.0\Hair.Domain.AssemblyInfo.cs
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\obj\Debug\net8.0\Hair.Domain.csproj.CoreCompileInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\obj\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\obj\Debug\net8.0\refint\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\obj\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\Haircut App\Hair.Api\Hair.Domain\obj\Debug\net8.0\ref\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\bin\Debug\net8.0\Hair.Domain.deps.json
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\bin\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\bin\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.csproj.AssemblyReference.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.AssemblyInfoInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.AssemblyInfo.cs
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.csproj.CoreCompileInputs.cache
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\obj\Debug\net8.0\refint\Hair.Domain.dll
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\Haircut App\BarberApp\Hair.Domain\obj\Debug\net8.0\ref\Hair.Domain.dll
+D:\BarberApp3\Hair.Domain\bin\Debug\net8.0\Hair.Domain.deps.json
+D:\BarberApp3\Hair.Domain\bin\Debug\net8.0\Hair.Domain.dll
+D:\BarberApp3\Hair.Domain\bin\Debug\net8.0\Hair.Domain.pdb
+D:\BarberApp3\Hair.Domain\obj\Debug\net8.0\Hair.Domain.csproj.AssemblyReference.cache
+D:\BarberApp3\Hair.Domain\obj\Debug\net8.0\Hair.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\BarberApp3\Hair.Domain\obj\Debug\net8.0\Hair.Domain.AssemblyInfoInputs.cache
+D:\BarberApp3\Hair.Domain\obj\Debug\net8.0\Hair.Domain.AssemblyInfo.cs
+D:\BarberApp3\Hair.Domain\obj\Debug\net8.0\Hair.Domain.csproj.CoreCompileInputs.cache
+D:\BarberApp3\Hair.Domain\obj\Debug\net8.0\Hair.Domain.dll
+D:\BarberApp3\Hair.Domain\obj\Debug\net8.0\refint\Hair.Domain.dll
+D:\BarberApp3\Hair.Domain\obj\Debug\net8.0\Hair.Domain.pdb
+D:\BarberApp3\Hair.Domain\obj\Debug\net8.0\ref\Hair.Domain.dll
+D:\BarberApp3\Hair.Domain\obj\Debug\net8.0\Hair.Domain.sourcelink.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\bin\Debug\net8.0\Hair.Domain.deps.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\bin\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\bin\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.csproj.AssemblyReference.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.AssemblyInfoInputs.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.AssemblyInfo.cs
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.csproj.CoreCompileInputs.cache
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\refint\Hair.Domain.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.pdb
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\ref\Hair.Domain.dll
