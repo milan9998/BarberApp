@@ -21,6 +21,8 @@ public class Barber
     public string BarberName { get; private set; }
     public string PhoneNumber { get; private set; }
     
+    public int Age { get; private set; }
+    
   //  public string PictureUrl { get; private set; }//****** dodati
     public string Email { get; private set; }
     

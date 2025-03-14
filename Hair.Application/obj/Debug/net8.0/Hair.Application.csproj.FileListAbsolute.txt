@@ -59,3 +59,4 @@ C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.A
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\refint\Hair.Application.dll
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.Application.pdb
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\ref\Hair.Application.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Application\obj\Debug\net8.0\Hair.Application.sourcelink.json

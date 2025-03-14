@@ -75,3 +75,4 @@ C:\Users\proni\RiderProjects\HairCutApp\Hair.Infrastructure\obj\Debug\net8.0\ref
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Infrastructure\obj\Debug\net8.0\Hair.Infrastructure.pdb
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Infrastructure\obj\Debug\net8.0\Hair.Infrastructure.genruntimeconfig.cache
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Infrastructure\obj\Debug\net8.0\ref\Hair.Infrastructure.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Infrastructure\obj\Debug\net8.0\Hair.Infrastructure.sourcelink.json

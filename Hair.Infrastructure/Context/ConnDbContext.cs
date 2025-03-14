@@ -11,6 +11,7 @@ namespace Hair.Infrastructure.Context;
 public class ConnDbContext : DbContext,IHairDbContext
 {
     private readonly string _connectionString;
+    
     public ConnDbContext(DbContextOptions<ConnDbContext> options,IOptions<PostgresDbConfiguration> postgresConfig): base(options)
     {
         _connectionString = postgresConfig.Value.ConnectionString;
@@ -28,7 +29,7 @@ public class ConnDbContext : DbContext,IHairDbContext
             optionsBuilder.UseNpgsql(_connectionString);
         }
     } 
-     //   => optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123");
+   //    => optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123");
 
 
     public DbSet<Company> Companies { get; set; }

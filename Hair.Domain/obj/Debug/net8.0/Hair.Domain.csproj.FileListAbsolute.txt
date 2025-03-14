@@ -47,3 +47,4 @@ C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\refint\Hair.Domain.dll
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.pdb
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\ref\Hair.Domain.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Domain\obj\Debug\net8.0\Hair.Domain.sourcelink.json
