@@ -32,6 +32,7 @@ public class GetAllFreAppointmentsHandler(IHairDbContext dbContext) : IRequestHa
         var endTime = request.selectedDate.Date.AddHours(barberWorkTime.IndividualEndTime.Value.Hours)
             .AddMinutes(barberWorkTime.IndividualEndTime.Value.Minutes);
 
+        
 
         var list = new List<DateTime>();
 

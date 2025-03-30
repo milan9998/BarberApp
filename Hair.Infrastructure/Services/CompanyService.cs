@@ -30,7 +30,7 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
         return new CompanyCreateDto(company.CompanyName);
     }
 
-    public async Task<List<BarberDetailsDto>> CompanyDetailsByIdAsync(Guid companyId, CancellationToken cancellationToken)
+    public async Task<List<BarberFullDetailsDto>> CompanyDetailsByIdAsync(Guid companyId, CancellationToken cancellationToken)
     {
         var barbers = await dbContext.Barbers.Include(x => x.Company)
             .Where(x => x.Company.Id == companyId)
@@ -39,12 +39,12 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
 
         if (barbers == null || barbers.Count == 0)
         {
-            return new List<BarberDetailsDto>();
+            return new List<BarberFullDetailsDto>();
         }
 
 
         return barbers.Select(barber =>
-            new BarberDetailsDto(barber.BarberName, barber.Company?.CompanyName ?? "No company")).ToList();
+            new BarberFullDetailsDto(barber.BarberId,barber.BarberName, barber.Company.CompanyName)).ToList();
     }
 
     public async Task<List<CompanyDetailsDto>> GetAllCompaniesAsync(CompanyDetailsDto companyDetailsDto, CancellationToken cancellationToken)

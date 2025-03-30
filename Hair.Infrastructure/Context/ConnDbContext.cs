@@ -12,11 +12,13 @@ public class ConnDbContext : DbContext,IHairDbContext
 {
     private readonly string _connectionString;
     
+    public ConnDbContext(DbContextOptions<ConnDbContext> options) : base(options) { }
+    /*
     public ConnDbContext(DbContextOptions<ConnDbContext> options,IOptions<PostgresDbConfiguration> postgresConfig): base(options)
     {
         _connectionString = postgresConfig.Value.ConnectionString;
     }
-
+*/
     public ConnDbContext()
     {
         

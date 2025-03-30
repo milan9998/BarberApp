@@ -1,6 +1,5 @@
 ﻿using Hair.Application.Common.Dto.Barber;
 using Hair.Domain.Entities;
-using Microsoft.JSInterop.Infrastructure;
 
 namespace Hair.Application.Common.Mappers;
 

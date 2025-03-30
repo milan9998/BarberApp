@@ -1,0 +1,139 @@
+﻿@page "/company/{id:guid}"
+@using System.Globalization
+@using Hair.Application.Common.Dto.Barber
+@using Hair.Application.Common.Dto.Company
+@using Hair.Application.Common.Dto.Schedule
+@using Hair.Application.Common.Interfaces
+@using Hair.Application.Schedules.Queries
+@using Hair.Infrastructure.Services
+@using MediatR
+@using MudBlazor
+@inject ICompanyService CompanyService
+@inject IMediator Mediator
+
+<h3>Company Details</h3>
+
+@if (_barbers.Any())
+{
+    <ul class="list-group">
+        @foreach (var barber in _barbers)
+        {
+            <li class="list-group-item">
+                <h5>@barber.BarberName</h5>
+                <p><strong>Kompanija:</strong> @barber.CompanyName</p>
+                
+                <MudButton OnClick="() => SelectBarber(barber.BarberId)" Color="Color.Info">
+                    Pogledaj slobodne termine
+                </MudButton>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Nema dostupnih barbera.</p>
+}
+
+<MudCard>
+    <MudCardContent>
+        <MudDatePicker PickerVariant="PickerVariant.Static" DateChanged="OnDateSelected" Rounded="true" Elevation="1" />
+    </MudCardContent>
+</MudCard>
+
+@if (_freeAppointments.Any())
+{
+    <MudList T="string">
+        @foreach (var appointment in _freeAppointments)
+        {
+            <MudListItem T="string">
+                <MudText>@appointment.dateAndTime.ToString("HH:mm") - Slobodno</MudText>
+            </MudListItem>
+        }
+    </MudList>
+
+}
+else
+{
+    <MudText>Nema slobodnih termina za izabrani datum.</MudText>
+}
+
+
+@code {
+    [Parameter] public Guid BarberId { get; set; }
+    private string _dateFormat = "dd.MM.yyyy";
+    private DateTime? _selectedDate = DateTime.Today; 
+    private List<FreeAppointmentsCheckDto> _freeAppointments = new();
+
+    private async Task OnDateSelected(DateTime? newDate)
+    {
+        if (newDate.HasValue)
+        {
+            _selectedDate = newDate;
+        }
+        else
+        {
+            _selectedDate = DateTime.Today;
+        }
+
+        await LoadFreeAppointments(BarberId);
+        StateHasChanged();
+    }
+
+    private async Task LoadFreeAppointments(Guid barberId)
+    {
+        var query = new GetAllFreeAppointmentsQuery(_selectedDate ?? DateTime.Today, barberId);
+        _freeAppointments = await Mediator.Send(query);
+        StateHasChanged();
+    }
+
+    private async Task SelectBarber(Guid barberId)
+    {
+        BarberId = barberId; // Postavljamo ID izabranog barbera
+        Console.WriteLine(BarberId);
+        await LoadFreeAppointments(BarberId); // Pozivamo metodu za učitavanje slobodnih termina
+        StateHasChanged();
+    }
+
+
+    [Parameter] public Guid Id { get; set; }
+
+    private string _bound = "not set";
+
+    private List<BarberFullDetailsDto> _barbers = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _barbers = await CompanyService.CompanyDetailsByIdAsync(Id, CancellationToken.None);
+        StateHasChanged();
+    }
+
+    private void DatePickerTextChanged(string value)
+    {
+        if (value == null || value.Length < 6)
+        {
+            _selectedDate = null;
+        }
+        else
+        {
+            string[] formats = { "ddMMyy", "dd.MM.yyyy", "dd.M.yyyy", "d.MM.yyyy", "d.M.yyyy", "dd.MM.yy", "dd.M.yy", "d.MM.yy", "d.M.yy" };
+            if (DateTime.TryParseExact(value, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime validDate))
+            {
+                _selectedDate = validDate;
+            }
+            else
+            {
+                _selectedDate = null;
+            }
+        }
+
+        if (_selectedDate.HasValue)
+        {
+            _bound = _selectedDate.Value.ToString(_dateFormat);
+        }
+        else
+        {
+            _bound = "not set";
+        }
+    }
+
+}

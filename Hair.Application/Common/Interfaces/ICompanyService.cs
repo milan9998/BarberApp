@@ -11,7 +11,7 @@ public interface ICompanyService
     );
 
 
-    Task<List<BarberDetailsDto>> CompanyDetailsByIdAsync(
+    Task<List<BarberFullDetailsDto>> CompanyDetailsByIdAsync(
         Guid companyId,
         CancellationToken cancellationToken
     );

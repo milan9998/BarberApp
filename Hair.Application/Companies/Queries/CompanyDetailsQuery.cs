@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hair.Application.Companies.Queries;
 
-public record CompanyDetailsQuery(Guid CompanyId) : IRequest<List<BarberDetailsDto>>;
+public record CompanyDetailsQuery(Guid CompanyId) : IRequest<List<BarberFullDetailsDto>>;
 
 public class CompanyDetailsQueryHandler(ICompanyService companyService)
-    : IRequestHandler<CompanyDetailsQuery, List<BarberDetailsDto>>
+    : IRequestHandler<CompanyDetailsQuery, List<BarberFullDetailsDto>>
 {
-    public async Task<List<BarberDetailsDto>> Handle(CompanyDetailsQuery request, CancellationToken cancellationToken)
+    public async Task<List<BarberFullDetailsDto>> Handle(CompanyDetailsQuery request, CancellationToken cancellationToken)
     {
         var x = await companyService.CompanyDetailsByIdAsync(request.CompanyId, cancellationToken);
         return x;
