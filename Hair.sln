@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hair.Domain", "Hair.Domain\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hair.Infrastructure", "Hair.Infrastructure\Hair.Infrastructure.csproj", "{6468EB1B-ECE7-4582-851A-2E30B4B54524}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hair.Client", "Hair.Client\Hair.Client.csproj", "{B8047910-5164-43A5-8684-9A257DB977DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hair.ClientUI", "Hair.ClientUI\Hair.ClientUI.csproj", "{7AAD7469-FC45-499D-8182-7BFF57E4C848}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +32,9 @@ Global
 		{6468EB1B-ECE7-4582-851A-2E30B4B54524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6468EB1B-ECE7-4582-851A-2E30B4B54524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6468EB1B-ECE7-4582-851A-2E30B4B54524}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8047910-5164-43A5-8684-9A257DB977DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8047910-5164-43A5-8684-9A257DB977DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8047910-5164-43A5-8684-9A257DB977DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8047910-5164-43A5-8684-9A257DB977DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AAD7469-FC45-499D-8182-7BFF57E4C848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAD7469-FC45-499D-8182-7BFF57E4C848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAD7469-FC45-499D-8182-7BFF57E4C848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAD7469-FC45-499D-8182-7BFF57E4C848}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

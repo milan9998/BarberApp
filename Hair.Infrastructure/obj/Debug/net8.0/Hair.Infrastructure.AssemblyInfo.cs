@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hair.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e19375c5ff72a9de4bc09061972651df3ab9ce5a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ad9c288de46e9c4a9b2b806b7a479315d649271")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hair.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hair.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

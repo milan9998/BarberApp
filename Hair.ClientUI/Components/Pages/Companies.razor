@@ -1,16 +1,15 @@
-﻿@page "/barbers"
+﻿@page "/Companies"
 @using Hair.Application.Common.Dto.Company
 @using Hair.Application.Common.Interfaces
 @inject ICompanyService CompanyService
 
-<PageTitle>Counter</PageTitle>
+<PageTitle>Companies</PageTitle>
 
-
-<h3>Lista Kompanija</h3>
+<h3>All available companies</h3>
 
 @if (_companies.Count == 0)
 {
-    <p>Nema dostupnih kompanija.</p>
+    <p>No companies available!</p>
 }
 else
 {
@@ -18,13 +17,15 @@ else
         @foreach (var company in _companies)
         {
             <li>
-                <NavLink class="nav-link" href="@($"/company/{company.CompanyId}")">
-                    <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> @company.CompanyName
+                <NavLink class="nav-link" href="@($"/CompanyBarbers/{company.CompanyId}")">
+                    <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>@company.CompanyName
                 </NavLink>
             </li>
         }
     </ul>
 }
+
+
 
 @code {
     private List<CompanyDetailsDto> _companies = new();

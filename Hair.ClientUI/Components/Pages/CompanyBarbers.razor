@@ -1,0 +1,101 @@
+﻿@page "/CompanyBarbers/{id:guid}"
+@using Hair.Application.Common.Dto.Barber
+@using Hair.Application.Common.Dto.Schedule
+@using Hair.Application.Common.Interfaces
+@using Hair.Application.Schedules.Queries
+@using Hair.Infrastructure.Services
+@using MediatR
+@using Blazorise
+<h3>CompanyBarbers</h3>
+@inject IMediator Mediator
+@inject ICompanyService CompanyService
+
+<h3>CompanyDetails</h3>
+
+@if (_barbers.Any())
+{
+    <ul>
+        @foreach (var barber in _barbers)
+        {
+            <li>
+                <h5>@barber.BarberName</h5>
+                <p><strong>Company: </strong> @barber.CompanyName</p>
+
+                <Button Color="Color.Primary" Clicked="() => SelectedBarber(barber.BarberId)">
+                    Check free appointments here!
+                </Button>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>There are no barbers available right now!</p>
+}
+
+<Card>
+    <CardBody>
+        <DatePicker TValue="DateTime" Value="_selectedDate" ValueChanged="OnDateSelected" ShowCalendarButtons="true"></DatePicker>
+
+    </CardBody>
+</Card>
+
+@if (_freeAppointments.Any())
+{
+    <List>
+        @foreach (var appointment in _freeAppointments)
+        {
+            <ListItem>
+                <Text>@appointment.dateAndTime.ToString("HH:mm:ss")</Text>
+            </ListItem>
+        }
+    </List>
+}
+
+@code {
+    [Parameter]
+    public Guid BarberId { get; set; }
+    //private string _dateFormat = "dd.MM.yyyy";
+    private DateTime _selectedDate = DateTime.Today;
+    private List<FreeAppointmentsCheckDto> _freeAppointments = new();
+    private List<BarberFullDetailsDto> _barbers = new();
+  
+    [Parameter] 
+    public Guid Id { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        _barbers = await CompanyService.CompanyDetailsByIdAsync(Id, CancellationToken.None);
+        StateHasChanged();
+    }
+
+
+
+    private async Task OnDateSelected(DateTime newDate)
+    {
+        
+            _selectedDate = newDate;
+            var x = _selectedDate;
+            await LoadFreeAppointments(_selectedDate,BarberId);
+        
+        StateHasChanged();
+    }
+
+    private async Task LoadFreeAppointments( DateTime selectedDate,Guid barberId)
+    {
+        // Učitavanje slobodnih termina za odabranog barbera sa specifičnim datumom
+        var query = new GetAllFreeAppointmentsQuery(selectedDate, barberId);
+        _freeAppointments = await Mediator.Send(query);
+        StateHasChanged();
+    }
+
+
+    private async Task SelectedBarber(Guid barberId)
+    {
+        BarberId = barberId;
+    
+        StateHasChanged();
+    }
+}
