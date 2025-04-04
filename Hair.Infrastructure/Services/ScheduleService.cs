@@ -43,7 +43,8 @@ public class ScheduleService(IHairDbContext dbContext,
        
       /*  var occupiedAppointment = await dbContext.Appointments
             .FirstOrDefaultAsync(x => x.Time == normalizedTime, cancellationToken);*/
-        var x = await IsAppointmentAvailable(normalizedTime, cancellationToken);
+        var x = await IsAppointmentAvailable(schedule.barberId,normalizedTime, cancellationToken);
+        
         if (x)
         {
             throw new ValidationException("Schedule appointment already exists.");
@@ -119,9 +120,13 @@ public class ScheduleService(IHairDbContext dbContext,
         return schedule.time.TimeOfDay >= start && schedule.time.TimeOfDay < end;
     }
 
-    private async Task<bool> IsAppointmentAvailable(DateTime time, CancellationToken cancellationToken)
+    private async Task<bool> IsAppointmentAvailable(Guid barberId, DateTime time, CancellationToken cancellationToken)
     {
-        var occupied = await dbContext.Appointments.Where(x => x.Time == time).FirstOrDefaultAsync(cancellationToken);
-        return occupied != null;
+        var occupied = await dbContext.Appointments
+            .Where(x => x.Barberid == barberId && x.Time == time) // Proverava samo datog frizera
+            .FirstOrDefaultAsync(cancellationToken);
+        
+        return occupied != null; // Termin je slobodan za datog frizera
     }
+
 }

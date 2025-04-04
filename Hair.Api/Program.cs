@@ -23,12 +23,13 @@ builder.Services.AddApplication();
 builder.Services.AddScoped<IHairDbContext, ConnDbContext>();
 builder.Services.AddDbContext<ConnDbContext>(options =>     
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 /*
 builder.Services.Configure<PostgresDbConfiguration>(
     builder.Configuration.GetSection("PostgresDbConfiguration"));
 */
 var app = builder.Build();
-
+app.UseStaticFiles();
 
 if (app.Environment.IsDevelopment())
 {
