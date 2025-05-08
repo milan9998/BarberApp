@@ -10,7 +10,7 @@ namespace Hair.Infrastructure.Context;
 
 public class ConnDbContext : DbContext,IHairDbContext
 {
-    private readonly string _connectionString;
+    
     
     public ConnDbContext(DbContextOptions<ConnDbContext> options) : base(options) { }
     /*
@@ -24,13 +24,13 @@ public class ConnDbContext : DbContext,IHairDbContext
         
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+  /*  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseNpgsql(_connectionString);
+            optionsBuilder.UseNpgsql("DefaultConnection");
         }
-    } 
+    } */
    //    => optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123");
 
 
