@@ -3,18 +3,23 @@ using Hair.Application.Common.Interfaces;
 using Hair.Application.Common.Mappers;
 using Hair.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hair.Application.Companies.Commands;
 
-public record CompanyCreateCommand(CompanyCreateDto Company) : IRequest<CompanyCreateDto?>;
+public record CompanyCreateCommand(string CompanyName, IFormFile? Image) : IRequest<CompanyCreateDto?>;
 
 public class CompanyCreateCommandHandler(ICompanyService companyService)
     : IRequestHandler<CompanyCreateCommand, CompanyCreateDto?>
 {
     public async Task<CompanyCreateDto?> Handle(CompanyCreateCommand request, CancellationToken cancellationToken)
     {
-        var x = await companyService.CreateCompanyAsync(request.Company, cancellationToken);
+        
+        
+        
+        var x = await companyService.CreateCompanyAsync(request.CompanyName, request.Image, cancellationToken);
+        
         return x;
     }
     

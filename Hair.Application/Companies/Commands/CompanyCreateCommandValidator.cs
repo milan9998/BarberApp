@@ -8,7 +8,9 @@ public class CompanyCreateCommandValidator : AbstractValidator<CompanyCreateComm
 {
     public CompanyCreateCommandValidator()
     {
+        /*
         RuleFor(x=> x.Company).NotEmpty();
         RuleFor(x => x.Company).SetValidator(new CompanyCreateDtoValidator());
+        */
     }
 }

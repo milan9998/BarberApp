@@ -292,3 +292,4 @@ C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.pdb
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.genruntimeconfig.cache
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\ref\Hair.Api.dll
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.sourcelink.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Api.staticwebassets.runtime.json

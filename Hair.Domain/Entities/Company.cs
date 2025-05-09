@@ -18,7 +18,7 @@ public class Company
     
     public IList<Barber> Barbers { get; private set; } = new List<Barber>();
 
-    public Company AddImage(string imageUrl)
+    public Company AddImage(string? imageUrl)
     {
         ImageUrl = imageUrl;
         return this;

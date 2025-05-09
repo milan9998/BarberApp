@@ -1,7 +1,4 @@
-﻿using Google.Apis.Auth.OAuth2;
-using Google.Apis.Drive.v3;
-using Google.Apis.Services;
-using Google.Apis.Upload;
+﻿
 using Hair.Application.Common.Dto.Barber;
 using Hair.Application.Common.Dto.Company;
 using Hair.Application.Common.Interfaces;
@@ -17,67 +14,65 @@ namespace Hair.Infrastructure.Services;
 public class CompanyService (IHairDbContext dbContext) : ICompanyService
 {
 
-    public async Task<string> UploadImageToDrive([FromForm]IFormFile image)
+    public async Task<string> UploadImageAsync([FromForm] IFormFile image)
     {
-        
-        var credential = GoogleCredential.FromFile("credentials.json")
-            .CreateScoped(DriveService.Scope.DriveFile);
+        if (image == null || image.Length == 0)
+            throw new ArgumentException("Image file is empty.");
 
-        var service = new DriveService(new BaseClientService.Initializer()
+        // folder: wwwroot/images/companies
+        var folderName = Path.Combine("wwwroot", "images", "companies");
+        var folderPath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+        if (!Directory.Exists(folderPath))
+            Directory.CreateDirectory(folderPath);
+
+        var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+        var filePath = Path.Combine(folderPath, uniqueFileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
         {
-            HttpClientInitializer = credential,
-            ApplicationName = "YourAppName",
-        });
-
-        // Priprema fajla za upload
-        var fileMetadata = new Google.Apis.Drive.v3.Data.File()
-        {
-            Name = image.FileName,
-            MimeType = image.ContentType
-        };
-
-        using var stream = image.OpenReadStream();
-
-        // Upload na Google Drive
-        var request = service.Files.Create(fileMetadata, stream, image.ContentType);
-        request.Fields = "id, webViewLink";
-        var result = await request.UploadAsync();
-
-        if (result.Status == UploadStatus.Completed)
-        {
-            var file = request.ResponseBody;
-            return ("Successfully uploaded a new image");
-
+            await image.CopyToAsync(stream);
         }
-        else
-        {
-            return ("Failed to upload a new image");
-        }
+
+        // Return full URL path
+        var fullUrl = $"http://localhost:5045/images/companies/{uniqueFileName}"; // Change localhost:5000 if necessary
+        return fullUrl;
     }
+
     
     
     
-    public async Task<CompanyCreateDto> CreateCompanyAsync(CompanyCreateDto companyCreate,
-        CancellationToken cancellationToken)
+    public async Task<CompanyCreateDto> CreateCompanyAsync(string companyName, IFormFile? image, CancellationToken cancellationToken)
     {
-        var x = await dbContext.Companies.Where(c => c.CompanyName == companyCreate.CompanyName)
+        var x = await dbContext.Companies.Where(c => c.CompanyName == companyName)
             .FirstOrDefaultAsync();
         if (x is  not null)
         {
-            throw new Exception($"Company {companyCreate.CompanyName} already exists");
+            throw new Exception($"Company {companyName} already exists");
         }
         
+        string? imageUrl = null;
+        if (image is not null)
+        {
+            imageUrl = await UploadImageAsync(image);
+        }
      
-        Company company = new Company(companyCreate.CompanyName);
+        Company company = new Company(companyName);
+        company.AddImage(imageUrl);
         
+        //var companySaved = companyCreate.FromCreateDtoToEntity();
         
-        var companySaved = companyCreate.FromCreateDtoToEntity();
-        dbContext.Companies.Add(companySaved);
+        dbContext.Companies.Add(company);
         
         await dbContext.SaveChangesAsync(cancellationToken);
-        return new CompanyCreateDto(company.CompanyName,company.ImageUrl);
+        return new CompanyCreateDto(company.CompanyName, company.ImageUrl);
     }
 
+    
+    
+    
+    
+    
     public async Task<List<BarberFullDetailsDto>> CompanyDetailsByIdAsync(Guid companyId, CancellationToken cancellationToken)
     {
         var barbers = await dbContext.Barbers.Include(x => x.Company)
@@ -108,3 +103,50 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
         return result;
     }
 }
+
+
+/*
+    var credential = GoogleCredential.FromFile("credentials.json")
+            .CreateScoped(DriveService.Scope.DriveFile);
+
+        var service = new DriveService(new BaseClientService.Initializer()
+        {
+            HttpClientInitializer = credential,
+            ApplicationName = "YourAppName",
+        });
+
+        // Priprema fajla za upload
+        var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+        {
+            Name = image.FileName,
+            MimeType = image.ContentType
+        };
+
+        using var stream = image.OpenReadStream();
+
+        // Upload na Google Drive
+        var request = service.Files.Create(fileMetadata, stream, image.ContentType);
+        request.Fields = "id, webViewLink";
+        var result = await request.UploadAsync();
+
+        if (result.Status == UploadStatus.Completed)
+        {
+            var file = request.ResponseBody;
+
+            var permission = new Google.Apis.Drive.v3.Data.Permission
+            {
+                Role = "reader",
+                Type = "anyone"
+            };
+
+            await service.Permissions.Create(permission, file.Id).ExecuteAsync();
+            
+            return $"https://drive.google.com/uc?export=view&id={file.Id}";
+            //return file.WebViewLink;
+
+        }
+        else
+        {
+            return ("Failed to upload a new image");
+        }
+ */

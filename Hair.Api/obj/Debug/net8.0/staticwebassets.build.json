@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "DpC2ZkLEfBbZ4HyxGUJpFqSCIw0GavU0JEqellRxC8I=",
+  "Hash": "E3tXpBBbaKYaA/0lR4QXan9EMiCnixhHBn8OlM5WVLs=",
   "Source": "Hair.Api",
   "BasePath": "_content/Hair.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "Hair.Api\\wwwroot",
+      "Source": "Hair.Api",
+      "ContentRoot": "C:\\Users\\proni\\RiderProjects\\HairCutApp\\Hair.Api\\wwwroot\\",
+      "BasePath": "_content/Hair.Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\proni\\RiderProjects\\HairCutApp\\Hair.Api\\wwwroot\\images\\companies\\86e8ee93-eb20-4ef1-a7a4-7ded54284fcc.png",
+      "SourceId": "Hair.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\proni\\RiderProjects\\HairCutApp\\Hair.Api\\wwwroot\\",
+      "BasePath": "_content/Hair.Api",
+      "RelativePath": "images/companies/86e8ee93-eb20-4ef1-a7a4-7ded54284fcc.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\companies\\86e8ee93-eb20-4ef1-a7a4-7ded54284fcc.png"
+    }
+  ]
 }
