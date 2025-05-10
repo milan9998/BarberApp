@@ -34,7 +34,7 @@ public class CompanyController(IHairDbContext dbContext): ApiBaseController
         
     }*/
 
-    [HttpPost]
+    [HttpPost("create-company")]
     public async Task<IActionResult> CreateCompany([FromForm] CompanyCreateRequestDto request)
     {
         var command = new CompanyCreateCommand(request.CompanyName, request.Image);
