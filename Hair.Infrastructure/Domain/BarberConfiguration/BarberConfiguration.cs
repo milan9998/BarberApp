@@ -10,6 +10,7 @@ public class BarberConfiguration : IEntityTypeConfiguration<Barber>
     {
         builder.ToTable("Barbers");
         builder.Property(b => b.BarberId).ValueGeneratedNever();
+        builder.HasKey(b => b.BarberId);
 
 
         builder.HasOne(b => b.Company)

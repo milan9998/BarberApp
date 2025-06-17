@@ -23,7 +23,7 @@ public class GetAllFreAppointmentsHandler(IHairDbContext dbContext) : IRequestHa
 
 
         var barberWorkTime = await dbContext.Barbers
-            .Where(x=> x.BarberId == request.barberId)
+            .Where(x=> x.Id == request.barberId)
             .FirstOrDefaultAsync(cancellationToken);
 
         var startTime = request.selectedDate.Date.AddHours(barberWorkTime.IndividualStartTime.Value.Hours)

@@ -15,6 +15,7 @@ public class ScheduleController: ApiBaseController
     {
         _dbContext = dbContext;
     }
+    
     [HttpGet("appointments-per-month")]
     public IActionResult GetAppointmentsPerMonth()
     {
@@ -53,7 +54,7 @@ public class ScheduleController: ApiBaseController
     }
 
     [HttpPost ("CreateAppointment")]
-    public async Task<ActionResult<Appointment>> CreateAppointmentAsync([FromBody]ScheduleAppointmentCommand command)
+    public async Task<ActionResult<Appointment>> CreateAppointmentAsync([FromForm]ScheduleAppointmentCommand command)
     {
         try
         {

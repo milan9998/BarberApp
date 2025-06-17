@@ -101,7 +101,7 @@ public class ScheduleService(IHairDbContext dbContext,
     public async Task<List<GetAllSchedulesByBarberIdDto>> GetAllSchedulesByBarberIdAsync(
         Guid barberId, CancellationToken cancellationToken)
     {
-        var appointments = await dbContext.Appointments.Where(x => barberId == x.Barberid).ToListAsync();
+        var appointments = await dbContext.Appointments.Where(x => barberId == x.Id).ToListAsync();
         var result = appointments.Select(appointment => new GetAllSchedulesByBarberIdDto
         {
             barberId = appointment.Barberid,
@@ -112,7 +112,7 @@ public class ScheduleService(IHairDbContext dbContext,
     
     private async Task<bool> IsWithinBarberWorkHours(ScheduleAppointmentCreateDto schedule, CancellationToken cancellationToken)
     {
-        var barber = await dbContext.Barbers.FirstOrDefaultAsync(x => x.BarberId == schedule.barberId, cancellationToken);
+        var barber = await dbContext.Barbers.FirstOrDefaultAsync(x => x.Id == schedule.barberId, cancellationToken);
         if (barber == null) return false;
 
         var start = barber.IndividualStartTime.Value;

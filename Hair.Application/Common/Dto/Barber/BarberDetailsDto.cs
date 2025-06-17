@@ -1,3 +1,3 @@
 ﻿namespace Hair.Application.Common.Dto.Barber;
 
-public record BarberDetailsDto(string BarberName, string CompanyName);
+public record BarberDetailsDto(Guid BarberId, string BarberName, string CompanyName);
