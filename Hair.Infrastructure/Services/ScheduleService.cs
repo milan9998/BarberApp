@@ -112,7 +112,7 @@ public class ScheduleService(IHairDbContext dbContext,
     
     private async Task<bool> IsWithinBarberWorkHours(ScheduleAppointmentCreateDto schedule, CancellationToken cancellationToken)
     {
-        var barber = await dbContext.Barbers.FirstOrDefaultAsync(x => x.Id == schedule.barberId, cancellationToken);
+        var barber = await dbContext.Barbers.FirstOrDefaultAsync(x => x.BarberId == schedule.barberId, cancellationToken);
         if (barber == null) return false;
 
         var start = barber.IndividualStartTime.Value;

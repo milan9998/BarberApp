@@ -13,10 +13,12 @@ namespace Hair.Infrastructure.Services;
 
 public class CompanyService (IHairDbContext dbContext) : ICompanyService
 {
-
-    public async Task<string> UploadImageAsync([FromForm] IFormFile image)
+        
+    public async Task <List<string>> UploadImageAsync([FromForm] IList<IFormFile> image)
     {
-        if (image == null || image.Length == 0)
+        var urls = new List<string>();
+        
+        if (image == null || image.Count == 0)
             throw new ArgumentException("Image file is empty.");
 
         // folder: wwwroot/images/companies
@@ -25,24 +27,30 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
 
         if (!Directory.Exists(folderPath))
             Directory.CreateDirectory(folderPath);
-
-        var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
-        var filePath = Path.Combine(folderPath, uniqueFileName);
-
-        using (var stream = new FileStream(filePath, FileMode.Create))
+        for (int i = 0; i < image.Count; i++)
         {
-            await image.CopyToAsync(stream);
+            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(image[i].FileName);
+            var filePath = Path.Combine(folderPath, uniqueFileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await image[i].CopyToAsync(stream);
+            }
+            var fullUrl = $"http://localhost:5045/images/companies/{uniqueFileName}";
+            urls.Add(fullUrl);
         }
+       
+
+       
 
         // Return full URL path
-        var fullUrl = $"http://localhost:5045/images/companies/{uniqueFileName}"; // Change localhost:5000 if necessary
-        return fullUrl;
+         // Change localhost:5000 if necessary
+        return urls;
     }
 
     
     
     
-    public async Task<CompanyCreateDto> CreateCompanyAsync(string companyName, IFormFile? image, CancellationToken cancellationToken)
+    public async Task<CompanyCreateDto> CreateCompanyAsync(string companyName, IList<IFormFile?> images, CancellationToken cancellationToken)
     {
         var x = await dbContext.Companies.Where(c => c.CompanyName == companyName)
             .FirstOrDefaultAsync();
@@ -51,17 +59,24 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
             throw new Exception($"Company {companyName} already exists");
         }
         
-        string? imageUrl = null;
-        if (image is not null)
-        {
-            imageUrl = await UploadImageAsync(image);
-        }
+        IList<string?> imageUrl = null;
+       
      
-        Company company = new Company(companyName);
-        company.AddImage(imageUrl);
+       
         
         //var companySaved = companyCreate.FromCreateDtoToEntity();
         
+       
+
+        for (int i = 0; i < images.Count; i++)
+        {
+            if (images is not null)
+            {
+                imageUrl = await UploadImageAsync(images);
+            }
+        }
+        Company company = new Company(companyName);
+        company.AddImage(imageUrl);
         dbContext.Companies.Add(company);
         
         await dbContext.SaveChangesAsync(cancellationToken);

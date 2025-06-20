@@ -34,7 +34,7 @@ builder.Services.AddScoped<IHairDbContext, ConnDbContext>();
 builder.Services.AddDbContext<ConnDbContext>(options =>     
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<Barber, IdentityRole<Guid>>(options =>
+/*builder.Services.AddIdentity<Barber, IdentityRole<Guid>>(options =>
     {
         options.Password.RequireDigit = true;
         options.Password.RequiredLength = 6;
@@ -43,7 +43,7 @@ builder.Services.AddIdentity<Barber, IdentityRole<Guid>>(options =>
         options.Password.RequireLowercase = true;
     })
     .AddEntityFrameworkStores<ConnDbContext>()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders();*/
 
 /*
 builder.Services.Configure<PostgresDbConfiguration>(

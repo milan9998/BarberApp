@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Hair.Domain.Entities;
 
-public class Barber : IdentityUser<Guid>
+public class Barber
 {
     public Barber(string barberName, string phoneNumber, string email, TimeSpan? individualStartTime, TimeSpan? individualEndTime)
     {
@@ -15,13 +15,13 @@ public class Barber : IdentityUser<Guid>
         Email = email;
         IndividualStartTime = individualStartTime;
         IndividualEndTime = individualEndTime;
-        UserName = email;
+       
         
-        Id = Guid.NewGuid();
+        BarberId = Guid.NewGuid();
         //BarberId = Guid.NewGuid();
     }
 
-    [NotMapped] public Guid BarberId => Id;
+     public Guid BarberId {get; private set;}
     public string BarberName { get; private set; }
     public string PhoneNumber { get; private set; }
     

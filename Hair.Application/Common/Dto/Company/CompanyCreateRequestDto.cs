@@ -2,4 +2,4 @@
 
 namespace Hair.Application.Common.Dto.Company;
 
-public record CompanyCreateRequestDto(string CompanyName,IFormFile? Image);
+public record CompanyCreateRequestDto(string CompanyName,IList<IFormFile?> Image);

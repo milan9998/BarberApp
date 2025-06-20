@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hair.Application.Companies.Commands;
 
-public record CompanyCreateCommand(string CompanyName, IFormFile? Image) : IRequest<CompanyCreateDto?>;
+public record CompanyCreateCommand(string CompanyName, IList<IFormFile?> Image) : IRequest<CompanyCreateDto?>;
 
 public class CompanyCreateCommandHandler(ICompanyService companyService)
     : IRequestHandler<CompanyCreateCommand, CompanyCreateDto?>

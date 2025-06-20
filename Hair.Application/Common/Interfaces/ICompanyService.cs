@@ -7,7 +7,7 @@ namespace Hair.Application.Common.Interfaces;
 public interface ICompanyService
 {
     Task<CompanyCreateDto> CreateCompanyAsync(
-        string companyName, IFormFile? image, 
+        string companyName, IList<IFormFile?> images, 
         CancellationToken cancellationToken
     );
 
