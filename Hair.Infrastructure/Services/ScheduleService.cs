@@ -39,12 +39,9 @@ public class ScheduleService(IHairDbContext dbContext,
             0, 
             schedule.time.Kind 
         );
-
-       
-      /*  var occupiedAppointment = await dbContext.Appointments
+       /*  var occupiedAppointment = await dbContext.Appointments
             .FirstOrDefaultAsync(x => x.Time == normalizedTime, cancellationToken);*/
         var x = await IsAppointmentAvailable(schedule.barberId,normalizedTime, cancellationToken);
-        
         if (x)
         {
             throw new ValidationException("Schedule appointment already exists.");
@@ -61,9 +58,6 @@ public class ScheduleService(IHairDbContext dbContext,
                 schedule.lastName,
                 schedule.email,
                 schedule.phoneNumber);
-                
-                
-       
             Appointment appointment = new Appointment(schedule.time,schedule.barberId);
             appointment.SetHaircutName(schedule.haircut);
 
@@ -77,8 +71,6 @@ public class ScheduleService(IHairDbContext dbContext,
                 0, // Milliseconds set to 0
                 DateTimeKind.Utc
             ));
-            
-          
             await notificationService.SendSmsAsync(customer.PhoneNumber, "Zdravo");
             
             dbContext.Customers.Add(customer);
@@ -89,15 +81,9 @@ public class ScheduleService(IHairDbContext dbContext,
         }
         catch (Exception ex)
         {
-            
-
             throw new Exception(ex.Message);
         }
     }
-
-    
-
-
     public async Task<List<GetAllSchedulesByBarberIdDto>> GetAllSchedulesByBarberIdAsync(
         Guid barberId, CancellationToken cancellationToken)
     {

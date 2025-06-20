@@ -17,7 +17,7 @@ public class ScheduleAppointmentCreateDtoValidator : AbstractValidator<ScheduleA
         _barberService = barberService;
 
         RuleFor(x => x.time)
-            .GreaterThan(DateTime.Now).WithMessage("You cannot schedule an appointment in the past");
+            .GreaterThan(DateTime.UtcNow).WithMessage("You cannot schedule an appointment in the past");
 
         RuleFor(x => x.time.Minute)
             .Must(m => m % 30 == 0).WithMessage("Appointments must be scheduled in 30-minute intervals");
