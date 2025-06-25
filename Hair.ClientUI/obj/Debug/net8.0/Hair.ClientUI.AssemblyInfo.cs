@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hair.ClientUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+addb66dc619e33e814aba80ee0d9de9b247b9806")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48e67913aa24044f44e1ac036ac2f96a1da56938")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hair.ClientUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hair.ClientUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

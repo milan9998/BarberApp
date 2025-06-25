@@ -7,6 +7,7 @@ using Hair.Domain.Entities;
 using Hair.Infrastructure;
 using Hair.Infrastructure.Configuration;
 using Hair.Infrastructure.Context;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,11 @@ builder.Services.AddScoped<IHairDbContext, ConnDbContext>();
 builder.Services.AddDbContext<ConnDbContext>(options =>     
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ConnDbContext>()
+    .AddDefaultTokenProviders();
+
 /*builder.Services.AddIdentity<Barber, IdentityRole<Guid>>(options =>
     {
         options.Password.RequireDigit = true;
@@ -51,6 +57,27 @@ builder.Services.Configure<PostgresDbConfiguration>(
 */
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var adminSeeder = scope.ServiceProvider.GetRequiredService<IAdminSeederService>();
+    await adminSeeder.SeedAdminAsync();
+}
+
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+
+        var error = context.Features.Get<IExceptionHandlerFeature>();
+        if (error != null)
+        {
+            var err = new { message = error.Error.Message };
+            await context.Response.WriteAsJsonAsync(err);
+        }
+    });
+});
 
 app.UseStaticFiles();
 
@@ -64,6 +91,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseCors("AllowFrontend");
+
+
 
 app.Run();
 /*

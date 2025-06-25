@@ -67,7 +67,8 @@ public class ScheduleController: ApiBaseController
            
             return BadRequest(new { Message = ex.Message });
         }
-     
+      
+        
     }
     
     [HttpGet ("GetAllUsedAppointments")]

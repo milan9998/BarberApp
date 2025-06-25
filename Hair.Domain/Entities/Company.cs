@@ -18,6 +18,10 @@ public class Company
     
     public IList<Barber> Barbers { get; private set; } = new List<Barber>();
 
+    public Guid OwnerId { get; set; }
+    
+    public ApplicationUser Owner { get; set; }
+    
     public Company AddImage(IList<string?> imageUrl)
     {
         ImageUrl = imageUrl;

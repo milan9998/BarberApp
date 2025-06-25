@@ -12,9 +12,6 @@ public class BarberService (IHairDbContext dbContext) : IBarberService
 {
     public async Task<BarberCreateDto> BarberCreateAsync(BarberCreateDto barberCreateDto, CancellationToken cancellationToken)
     {
-       
-        
-        
         var company = await dbContext.Companies.Where(x => x.Id == barberCreateDto.companyId).FirstOrDefaultAsync(cancellationToken);
         
         Barber barber = new Barber(
@@ -57,22 +54,15 @@ public class BarberService (IHairDbContext dbContext) : IBarberService
     {
         if (string.IsNullOrWhiteSpace(email))
             return false;
-
         try
         {
-            // Normalize the domain
+            
             email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
                 RegexOptions.None, TimeSpan.FromMilliseconds(200));
-
-            // Examines the domain part of the email and normalizes it.
             string DomainMapper(Match match)
             {
-                // Use IdnMapping class to convert Unicode domain names.
                 var idn = new IdnMapping();
-
-                // Pull out and process domain name (throws ArgumentException on invalid)
                 string domainName = idn.GetAscii(match.Groups[2].Value);
-
                 return match.Groups[1].Value + domainName;
             }
         }
@@ -84,7 +74,6 @@ public class BarberService (IHairDbContext dbContext) : IBarberService
         {
             return false;
         }
-
         try
         {
             return Regex.IsMatch(email,
@@ -101,7 +90,7 @@ public class BarberService (IHairDbContext dbContext) : IBarberService
     {
         if (string.IsNullOrWhiteSpace(phoneNumber))
             return false;
-        // Regex za više formata (prilagodite prema potrebi)
+        
         string pattern = @"^\+?381\s?(6\d{1})\s?\d{6,7}$";
         return Regex.IsMatch(phoneNumber, pattern);
     }

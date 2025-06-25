@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Hair.Infrastructure.Context;
 
-public class ConnDbContext : DbContext,IHairDbContext
+public class ConnDbContext :  IdentityDbContext<ApplicationUser>, IHairDbContext
 {
     
     
