@@ -101,8 +101,8 @@ public class ScheduleService(IHairDbContext dbContext,
         var barber = await dbContext.Barbers.FirstOrDefaultAsync(x => x.BarberId == schedule.barberId, cancellationToken);
         if (barber == null) return false;
 
-        var start = barber.IndividualStartTime.Value;
-        var end = barber.IndividualEndTime.Value;
+        var start = barber.IndividualStartTime;
+        var end = barber.IndividualEndTime;
         return schedule.time.TimeOfDay >= start && schedule.time.TimeOfDay < end;
     }
 

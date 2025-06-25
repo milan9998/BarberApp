@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Hair.Domain.Entities;
 
-public class Barber
+public class Barber 
 {
-    public Barber(string barberName, string phoneNumber, string email, TimeSpan? individualStartTime, TimeSpan? individualEndTime)
+    public Barber(string barberName, string phoneNumber, string email, TimeSpan individualStartTime, TimeSpan individualEndTime)
     {
         
         BarberName = barberName;
@@ -34,8 +34,8 @@ public class Barber
     
     public Company Company { get; private set; }
    
-    public TimeSpan? IndividualStartTime { get; private set; } 
-    public TimeSpan? IndividualEndTime { get; private set; }   
+    public TimeSpan IndividualStartTime { get; private set; } 
+    public TimeSpan IndividualEndTime { get; private set; }   
     
     
     
