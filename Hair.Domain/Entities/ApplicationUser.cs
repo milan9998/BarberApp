@@ -10,4 +10,7 @@ public class ApplicationUser : IdentityUser
     public Guid? CompanyId { get; set; }
     
     public Company Company { get; set; }
+    
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
 }

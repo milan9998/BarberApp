@@ -38,7 +38,7 @@ public class ConnDbContext :  IdentityDbContext<ApplicationUser>, IHairDbContext
     public DbSet<Barber> Barbers { get; set; }
 
     public DbSet<Appointment> Appointments { get; set; }
-    public DbSet<Customer> Customers { get; set; }
+    public DbSet<AnonymousUser> AnonymousUsers { get; set; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {

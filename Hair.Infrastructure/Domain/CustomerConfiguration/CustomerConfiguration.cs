@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Hair.Infrastructure.Domain.CustomerConfiguration;
 
-public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+public class CustomerConfiguration : IEntityTypeConfiguration<AnonymousUser>
 {
-    public void Configure(EntityTypeBuilder<Customer> builder)
+    public void Configure(EntityTypeBuilder<AnonymousUser> builder)
     {
         builder.ToTable("Customer");
         builder.Property(c => c.Id).ValueGeneratedNever();

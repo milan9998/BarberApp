@@ -7,6 +7,7 @@ using Hair.Domain.Entities;
 using Hair.Infrastructure;
 using Hair.Infrastructure.Configuration;
 using Hair.Infrastructure.Context;
+using Hair.Infrastructure.Services;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -61,6 +62,8 @@ using (var scope = app.Services.CreateScope())
 {
     var adminSeeder = scope.ServiceProvider.GetRequiredService<IAdminSeederService>();
     await adminSeeder.SeedAdminAsync();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    await AdminSeederService.SeedRolesAsync(roleManager);
 }
 
 app.UseExceptionHandler(errorApp =>

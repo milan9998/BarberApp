@@ -53,7 +53,7 @@ public class ScheduleService(IHairDbContext dbContext,
         }*/
         try
         {
-            Customer customer = new Customer(
+            AnonymousUser anonymousUser = new AnonymousUser(
                 schedule.firstName,
                 schedule.lastName,
                 schedule.email,
@@ -71,13 +71,13 @@ public class ScheduleService(IHairDbContext dbContext,
                 0, // Milliseconds set to 0
                 DateTimeKind.Utc
             ));
-            await notificationService.SendSmsAsync(customer.PhoneNumber, "Zdravo");
+            await notificationService.SendSmsAsync(anonymousUser.PhoneNumber, "Zdravo");
             
-            dbContext.Customers.Add(customer);
+            dbContext.AnonymousUsers.Add(anonymousUser);
             dbContext.Appointments.Add(appointment);
             await dbContext.SaveChangesAsync(cancellationToken);
-            return new ScheduleAppointmentCreateDto(customer.FirstName, customer.LastName, customer.Email,
-                customer.PhoneNumber, appointment.Time, schedule.barberId, appointment.HaircutName);
+            return new ScheduleAppointmentCreateDto(anonymousUser.FirstName, anonymousUser.LastName, anonymousUser.Email,
+                anonymousUser.PhoneNumber, appointment.Time, schedule.barberId, appointment.HaircutName);
         }
         catch (Exception ex)
         {

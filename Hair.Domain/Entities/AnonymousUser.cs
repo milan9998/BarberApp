@@ -2,9 +2,9 @@
 
 namespace Hair.Domain.Entities;
 
-public class Customer
+public class AnonymousUser
 {
-    public Customer(string? firstName, string? lastName, string? email, string phoneNumber)
+    public AnonymousUser(string? firstName, string? lastName, string? email, string phoneNumber)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -19,7 +19,7 @@ public class Customer
     public string? Email { get; private set; }
     public string PhoneNumber { get; private set; }
 
-    public Customer()
+    public AnonymousUser()
     {
     }
 }
