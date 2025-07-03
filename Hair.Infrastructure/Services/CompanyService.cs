@@ -3,6 +3,7 @@ using Hair.Application.Common.Dto.Barber;
 using Hair.Application.Common.Dto.Company;
 using Hair.Application.Common.Interfaces;
 using Hair.Application.Common.Mappers;
+using Hair.Application.Companies.Queries;
 using Hair.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -47,7 +48,14 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
         return urls;
     }
 
-    
+    public async Task<CompanyDetailsDto> GetCompanyDetailsById(Guid CompanyId, CancellationToken cancellationToken)
+    {
+
+        var company = await dbContext.Companies.Where(c => c.Id == CompanyId).FirstOrDefaultAsync(cancellationToken);
+        var x = new CompanyDetailsDto(company.Id,company.CompanyName,company.ImageUrl);
+        return x;
+
+    }
     
     
     public async Task<CompanyCreateDto> CreateCompanyAsync(string companyName, IList<IFormFile?> images, CancellationToken cancellationToken)

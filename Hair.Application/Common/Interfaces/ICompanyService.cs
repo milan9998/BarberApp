@@ -21,7 +21,11 @@ public interface ICompanyService
         CompanyDetailsDto companyDetailsDto,
         CancellationToken cancellationToken
     );
-    
+
+    Task<CompanyDetailsDto>
+        GetCompanyDetailsById
+        (Guid CompanyId, CancellationToken cancellationToken);
+
 
 
 

@@ -54,4 +54,9 @@ public class CompanyController(IHairDbContext dbContext): ApiBaseController
     {
         return Ok(await Mediator.Send(new GetAllCompaniesQuery(CompanyDetailsDto: new CompanyDetailsDto())));
     }
+    [HttpGet("getCompanyDetailsById")]
+    public async Task<ActionResult<Company>> GetCompanyDetailsByIdAsync([FromQuery] CompanyDetailsByIdQuery query)
+    {
+        return Ok(await Mediator.Send(query));
+    }
 }
