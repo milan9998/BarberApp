@@ -12,13 +12,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hair.Infrastructure.Services;
 
-public class CompanyService (IHairDbContext dbContext) : ICompanyService
+public class CompanyService(IHairDbContext dbContext) : ICompanyService
 {
-        
-    public async Task <List<string>> UploadImageAsync([FromForm] IList<IFormFile> image)
+
+    public async Task<List<string>> UploadImageAsync([FromForm] IList<IFormFile> image)
     {
         var urls = new List<string>();
-        
+
         if (image == null || image.Count == 0)
             throw new ArgumentException("Image file is empty.");
 
@@ -36,15 +36,16 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
             {
                 await image[i].CopyToAsync(stream);
             }
+
             var fullUrl = $"http://localhost:5045/images/companies/{uniqueFileName}";
             urls.Add(fullUrl);
         }
-       
 
-       
+
+
 
         // Return full URL path
-         // Change localhost:5000 if necessary
+        // Change localhost:5000 if necessary
         return urls;
     }
 
@@ -52,29 +53,22 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
     {
 
         var company = await dbContext.Companies.Where(c => c.Id == CompanyId).FirstOrDefaultAsync(cancellationToken);
-        var x = new CompanyDetailsDto(company.Id,company.CompanyName,company.ImageUrl);
-        return x;
+        var toReturnCompanyDetails = new CompanyDetailsDto(company.Id, company.CompanyName, company.ImageUrl);
+        return toReturnCompanyDetails;
 
     }
-    
-    
-    public async Task<CompanyCreateDto> CreateCompanyAsync(string companyName, IList<IFormFile?> images, CancellationToken cancellationToken)
+
+    public async Task<CompanyCreateDto> CreateCompanyAsync(string companyName, IList<IFormFile?> images,
+        CancellationToken cancellationToken)
     {
-        var x = await dbContext.Companies.Where(c => c.CompanyName == companyName)
+        var companyExists = await dbContext.Companies.Where(c => c.CompanyName == companyName)
             .FirstOrDefaultAsync();
-        if (x is  not null)
+        if (companyExists is not null)
         {
             throw new Exception($"Company {companyName} already exists");
         }
-        
+
         IList<string?> imageUrl = null;
-       
-     
-       
-        
-        //var companySaved = companyCreate.FromCreateDtoToEntity();
-        
-       
 
         for (int i = 0; i < images.Count; i++)
         {
@@ -83,20 +77,17 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
                 imageUrl = await UploadImageAsync(images);
             }
         }
+
         Company company = new Company(companyName);
         company.AddImage(imageUrl);
         dbContext.Companies.Add(company);
-        
+
         await dbContext.SaveChangesAsync(cancellationToken);
         return new CompanyCreateDto(company.CompanyName, company.ImageUrl);
     }
 
-    
-    
-    
-    
-    
-    public async Task<List<BarberFullDetailsDto>> CompanyDetailsByIdAsync(Guid companyId, CancellationToken cancellationToken)
+    public async Task<List<BarberFullDetailsDto>> CompanyDetailsByIdAsync(Guid companyId,
+        CancellationToken cancellationToken)
     {
         var barbers = await dbContext.Barbers.Include(x => x.Company)
             .Where(x => x.Company.Id == companyId)
@@ -110,10 +101,11 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
 
 
         return barbers.Select(barber =>
-            new BarberFullDetailsDto(barber.BarberId,barber.BarberName, barber.Company.CompanyName)).ToList();
+            new BarberFullDetailsDto(barber.BarberId, barber.BarberName, barber.Company.CompanyName)).ToList();
     }
 
-    public async Task<List<CompanyDetailsDto>> GetAllCompaniesAsync(CompanyDetailsDto companyDetailsDto, CancellationToken cancellationToken)
+    public async Task<List<CompanyDetailsDto>> GetAllCompaniesAsync(CompanyDetailsDto companyDetailsDto,
+        CancellationToken cancellationToken)
     {
         var companies = await dbContext.Companies.ToListAsync(cancellationToken);
 
@@ -126,50 +118,3 @@ public class CompanyService (IHairDbContext dbContext) : ICompanyService
         return result;
     }
 }
-
-
-/*
-    var credential = GoogleCredential.FromFile("credentials.json")
-            .CreateScoped(DriveService.Scope.DriveFile);
-
-        var service = new DriveService(new BaseClientService.Initializer()
-        {
-            HttpClientInitializer = credential,
-            ApplicationName = "YourAppName",
-        });
-
-        // Priprema fajla za upload
-        var fileMetadata = new Google.Apis.Drive.v3.Data.File()
-        {
-            Name = image.FileName,
-            MimeType = image.ContentType
-        };
-
-        using var stream = image.OpenReadStream();
-
-        // Upload na Google Drive
-        var request = service.Files.Create(fileMetadata, stream, image.ContentType);
-        request.Fields = "id, webViewLink";
-        var result = await request.UploadAsync();
-
-        if (result.Status == UploadStatus.Completed)
-        {
-            var file = request.ResponseBody;
-
-            var permission = new Google.Apis.Drive.v3.Data.Permission
-            {
-                Role = "reader",
-                Type = "anyone"
-            };
-
-            await service.Permissions.Create(permission, file.Id).ExecuteAsync();
-            
-            return $"https://drive.google.com/uc?export=view&id={file.Id}";
-            //return file.WebViewLink;
-
-        }
-        else
-        {
-            return ("Failed to upload a new image");
-        }
- */
