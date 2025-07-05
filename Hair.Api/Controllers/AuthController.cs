@@ -12,6 +12,7 @@ public class AuthController : ApiBaseController
     {
         return Ok(await Mediator.Send(loginCommand));
     }
+    
     [HttpPost("register")]
     [AllowAnonymous]
     public async Task<IActionResult> Register([FromForm] RegisterCommand registerCommand)
