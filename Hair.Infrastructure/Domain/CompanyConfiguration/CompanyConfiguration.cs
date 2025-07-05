@@ -16,6 +16,8 @@ public class CompanyConfiguration : IEntityTypeConfiguration<Company>
             .WithOne(u => u.Company)
             .HasForeignKey<Company>(c => c.OwnerId)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        
 
     }
 }

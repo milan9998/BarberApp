@@ -11,7 +11,10 @@ public class Haircuts
 
     public Guid Id { get; private set; }
     public int Duration { get; private set; }
+    public Guid CompanyId { get; private set; }
     public string HaircutType { get; private set; }
+    public decimal Price { get; private set; }
+    public Company Company { get; set; }
     
    
     

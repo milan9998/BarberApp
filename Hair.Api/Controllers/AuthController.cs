@@ -19,4 +19,10 @@ public class AuthController : ApiBaseController
     {
         return Ok(await Mediator.Send(registerCommand));
     }
+
+    [HttpPost("createCompanyOwner")]
+    public async Task<IActionResult> CreateCompanyOwner([FromForm] CreateCompanyOwnerCommand createCompanyOwnerCommand)
+    {
+        return Ok(await Mediator.Send(createCompanyOwnerCommand));
+    }
 }

@@ -21,6 +21,7 @@ public class Company
     public Guid OwnerId { get; set; }
     
     public ApplicationUser Owner { get; set; }
+    public IList<Haircuts> Haircuts { get; private set; } = new List<Haircuts>();
     
     public Company AddImage(IList<string?> imageUrl)
     {

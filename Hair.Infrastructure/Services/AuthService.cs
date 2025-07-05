@@ -32,7 +32,35 @@ public class AuthService(UserManager<ApplicationUser> userManager, SignInManager
         var result = await signInManager.PasswordSignInAsync(user, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
         return new AuthLevelDto(user.Email,roleName);
     }
-    
+
+    public async Task<CompanyOwnerResponseDto> CreateCompanyOwnerAsync(CompanyOwnerDto companyOwnerDto,
+        CancellationToken cancellationToken)
+    {
+        var appUser = new ApplicationUser()
+        {
+            UserName = companyOwnerDto.Email,
+            Email = companyOwnerDto.Email,
+            PhoneNumber = companyOwnerDto.PhoneNumber,
+            FirstName = companyOwnerDto.FirstName,
+            LastName = companyOwnerDto.LastName,
+            CompanyId = companyOwnerDto.CompanyId,
+            Role = Role.CompanyOwner
+
+        };
+        var result = await userManager.CreateAsync(appUser, companyOwnerDto.Password);
+        
+        if (!result.Succeeded)
+        {
+            var errorMsg = string.Join(", ", result.Errors.Select(e => e.Description));
+            throw new Exception(errorMsg);
+        }
+        return new CompanyOwnerResponseDto
+        (appUser.Email,
+            appUser.CompanyId, 
+            appUser.FirstName, 
+            appUser.LastName,
+            appUser.PhoneNumber);
+    }
 
     public async Task<AuthLevelDto> RegisterAsync(RegisterDto dto, CancellationToken cancellationToken)
     {
@@ -45,6 +73,7 @@ public class AuthService(UserManager<ApplicationUser> userManager, SignInManager
 
         var user = new ApplicationUser
         {
+            
             UserName = dto.Email,
             Email = dto.Email,
             PhoneNumber = dto.PhoneNumber,
