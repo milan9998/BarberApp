@@ -8,9 +8,12 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-        builder.HasOne(u => u.Company)
-               .WithOne(c => c.Owner)
-               .HasForeignKey<Company>(c => c.OwnerId)
-               .IsRequired(false);
+        /*
+        builder.HasMany(c => c.Companies)
+            .WithOne(u => u.Owner)
+            .HasForeignKey(c => c.CompanyOwnerId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Restrict);
+            */
     }
 }

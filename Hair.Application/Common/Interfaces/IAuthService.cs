@@ -11,5 +11,6 @@ public interface IAuthService
     Task<CompanyOwnerResponseDto> CreateCompanyOwnerAsync(CompanyOwnerDto companyOwnerDto,
         CancellationToken cancellationToken);
 
+    Task<bool> CheckIfCompanyOwnerExistsAsync(Guid companyId, CancellationToken cancellationToken);
 
 }

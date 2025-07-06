@@ -1,4 +1,5 @@
 ﻿using Hair.Application.Auth.Commands;
+using Hair.Application.Auth.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,5 +25,12 @@ public class AuthController : ApiBaseController
     public async Task<IActionResult> CreateCompanyOwner([FromForm] CreateCompanyOwnerCommand createCompanyOwnerCommand)
     {
         return Ok(await Mediator.Send(createCompanyOwnerCommand));
+    }
+
+    [HttpGet("checkIfCompanyOwnerExists")]
+    public async Task<IActionResult> CheckIfCompanyOwnerExists([FromQuery] CheckOwnerExistsQuery query,
+        CancellationToken cancellationToken)
+    {
+        return Ok(await Mediator.Send(query, cancellationToken));
     }
 }

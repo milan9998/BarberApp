@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 
 namespace Hair.Domain.Entities;
 
@@ -17,9 +18,11 @@ public class Company
     
     
     public IList<Barber> Barbers { get; private set; } = new List<Barber>();
-
-    public Guid OwnerId { get; set; }
     
+    
+    public string? CompanyOwnerId { get; set; }
+    
+    [ForeignKey("CompanyOwnerId")]
     public ApplicationUser Owner { get; set; }
     public IList<Haircuts> Haircuts { get; private set; } = new List<Haircuts>();
     

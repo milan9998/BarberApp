@@ -5,6 +5,7 @@ using Hair.Domain.Entities;
 using Hair.Domain.Enums;
 using Hair.Infrastructure.Context;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hair.Infrastructure.Services;
 
@@ -36,30 +37,69 @@ public class AuthService(UserManager<ApplicationUser> userManager, SignInManager
     public async Task<CompanyOwnerResponseDto> CreateCompanyOwnerAsync(CompanyOwnerDto companyOwnerDto,
         CancellationToken cancellationToken)
     {
-        var appUser = new ApplicationUser()
+        try
         {
-            UserName = companyOwnerDto.Email,
-            Email = companyOwnerDto.Email,
-            PhoneNumber = companyOwnerDto.PhoneNumber,
-            FirstName = companyOwnerDto.FirstName,
-            LastName = companyOwnerDto.LastName,
-            CompanyId = companyOwnerDto.CompanyId,
-            Role = Role.CompanyOwner
+            
+            var exists = await userManager.Users
+                .Where(u => u.CompanyId == companyOwnerDto.CompanyId && u.Role == Role.CompanyOwner)
+                .FirstOrDefaultAsync(cancellationToken);
 
-        };
-        var result = await userManager.CreateAsync(appUser, companyOwnerDto.Password);
+            if (exists != null)
+            {
+                throw new Exception($"Company {companyOwnerDto.CompanyId} already exists");
+            }
+            
+            var company = await dbContext.Companies
+                .FirstOrDefaultAsync(c => c.Id == companyOwnerDto.CompanyId, cancellationToken);
+            
+            var appUser = new ApplicationUser()
+            {
+                UserName = companyOwnerDto.Email,
+                Email = companyOwnerDto.Email,
+                PhoneNumber = companyOwnerDto.PhoneNumber,
+                FirstName = companyOwnerDto.FirstName,
+                LastName = companyOwnerDto.LastName,
+                CompanyId = companyOwnerDto.CompanyId,
+                Role = Role.CompanyOwner
+            };
+            var result = await userManager.CreateAsync(appUser, companyOwnerDto.Password);
+            
+            if (!result.Succeeded)
+            {
+                var errorMsg = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new Exception(errorMsg);
+            }
+            
+            company.CompanyOwnerId = appUser.Id;
+            await dbContext.SaveChangesAsync(cancellationToken);
         
-        if (!result.Succeeded)
-        {
-            var errorMsg = string.Join(", ", result.Errors.Select(e => e.Description));
-            throw new Exception(errorMsg);
+            
+            return new CompanyOwnerResponseDto
+                (appUser.Email,
+                appUser.CompanyId, 
+                appUser.FirstName, 
+                appUser.LastName,
+                appUser.PhoneNumber);
         }
-        return new CompanyOwnerResponseDto
-        (appUser.Email,
-            appUser.CompanyId, 
-            appUser.FirstName, 
-            appUser.LastName,
-            appUser.PhoneNumber);
+        catch (Exception ex)
+        {
+            throw new Exception($"Greška prilikom kreiranja vlasnika: {ex.Message}");
+        }
+    }
+
+    public async Task<bool> CheckIfCompanyOwnerExistsAsync(Guid companyId, CancellationToken cancellationToken)
+    {
+        var exists = await userManager.Users
+            .Where(u => u.CompanyId == companyId && u.Role == Role.CompanyOwner)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (exists != null)
+        {
+            return true;
+            //hrow new Exception($"Company {companyId} already exists");
+        }
+
+        return false;
     }
 
     public async Task<AuthLevelDto> RegisterAsync(RegisterDto dto, CancellationToken cancellationToken)

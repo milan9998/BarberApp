@@ -16,8 +16,6 @@ public class CompanyCreateCommandHandler(ICompanyService companyService)
     public async Task<CompanyCreateDto?> Handle(CompanyCreateCommand request, CancellationToken cancellationToken)
     {
         
-        
-        
         var x = await companyService.CreateCompanyAsync(request.CompanyName, request.Image, cancellationToken);
         
         return x;

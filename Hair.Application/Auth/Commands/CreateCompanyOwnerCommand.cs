@@ -12,7 +12,15 @@ public class CreateCompanyOwnerCommandHandler(IHairDbContext dbContext,IAuthServ
 {
     public async Task<CompanyOwnerResponseDto> Handle(CreateCompanyOwnerCommand request, CancellationToken cancellationToken)
     {
-        var companyOwner = await authService.CreateCompanyOwnerAsync(request.CompanyOwnerDto, cancellationToken);
-        return companyOwner;
+        try
+        {
+            var companyOwner = await authService.CreateCompanyOwnerAsync(request.CompanyOwnerDto, cancellationToken);
+            return companyOwner;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return null;
+        }
     }
 }

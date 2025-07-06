@@ -10,14 +10,13 @@ public class CompanyConfiguration : IEntityTypeConfiguration<Company>
     {
         builder.ToTable("Company");
         builder.HasIndex(x => x.CompanyName).IsUnique();
-        builder.Property(x => x.Id).ValueGeneratedNever();
+     //   builder.Property(x => new {x.Id, x.CompanyOwnerId}).ValueGeneratedNever();
         
         builder.HasOne(c => c.Owner)
-            .WithOne(u => u.Company)
-            .HasForeignKey<Company>(c => c.OwnerId)
+            .WithMany(u => u.Companies)
+            .HasForeignKey(c => c.CompanyOwnerId)
+            .IsRequired(false)
             .OnDelete(DeleteBehavior.Restrict);
-        
-        
 
     }
 }
