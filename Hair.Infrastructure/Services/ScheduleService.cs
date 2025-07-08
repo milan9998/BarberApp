@@ -20,7 +20,7 @@ public class ScheduleService(
     INotificationService notificationService) : IScheduleService
 {
 
-    public async Task<ScheduleAppointmentCreateDto> CreateScheduleAppointmentAsync(
+    public async Task<ScheduleAppointmentResponseDto> CreateScheduleAppointmentAsync(
         ScheduleAppointmentCreateDto schedule,
         CancellationToken cancellationToken)
     {
@@ -48,7 +48,43 @@ public class ScheduleService(
         {
             throw new ValidationException("Schedule appointment already exists.");
         }
+        
+        var haircut = await dbContext.Haircuts.Where(x=> x.Id == schedule.haircutId).FirstOrDefaultAsync(cancellationToken);
+        decimal haircutDuration = haircut.Duration;
+        int requiredSlots = (int) Math.Ceiling(haircutDuration / 30);
+        
+        //Console.WriteLine("Haircut duration: " + Math.Ceiling(haircutDuration / 30));
+        
+        var allFreeAppointments = await GetAllFreeAppointmentsQuery(schedule.time.Date, schedule.barberId, cancellationToken);
+        var freeTimes = allFreeAppointments.Select(dto => dto.dateAndTime).ToHashSet();
+        var test = new List<DateTime>();
+        bool hasAllSlots = true;
+        var requiredTimes = new List<DateTime>(); // čuva sve vreme koje je validno
 
+        for (int i = 0; i < requiredSlots; i++)
+        {
+            var checkTime = schedule.time.AddMinutes(i * 30);
+            requiredTimes.Add(checkTime);
+
+            if (freeTimes.Contains(checkTime))
+            {
+               test.Add(checkTime);
+            }
+        }
+        
+        if (!hasAllSlots)
+        {
+            throw new ValidationException("Nema dovoljno uzastopnih termina.");
+        }
+        
+        /*
+         * vreme koje imamo pocetno koje trazi korisnik + 30minuta, proveravas u bazi da li postoji taj termin slobodan
+         * i to se radi onoliko puta koliko je requiredSlots 
+         */
+        
+        
+        
+        
         /*  bool checkEmail = barberService.IsValidEmail(schedule.email);
           if (!checkEmail)
           {
@@ -62,7 +98,8 @@ public class ScheduleService(
                 schedule.email,
                 schedule.phoneNumber);
             Appointment appointment = new Appointment(schedule.time, schedule.barberId);
-            appointment.SetHaircutName(schedule.haircut);
+            
+            appointment.SetHaircutName(haircut.HaircutType);
 
             appointment.SetTime(new DateTime(
                 appointment.Time.Year,
@@ -79,9 +116,8 @@ public class ScheduleService(
             dbContext.AnonymousUsers.Add(anonymousUser);
             dbContext.Appointments.Add(appointment);
             await dbContext.SaveChangesAsync(cancellationToken);
-            return new ScheduleAppointmentCreateDto(anonymousUser.FirstName, anonymousUser.LastName,
-                anonymousUser.Email,
-                anonymousUser.PhoneNumber, appointment.Time, schedule.barberId, appointment.HaircutName);
+            return new ScheduleAppointmentResponseDto(anonymousUser.FirstName, anonymousUser.LastName, anonymousUser.Email,
+                anonymousUser.PhoneNumber, appointment.Time, schedule.barberId, haircut.HaircutType);
         }
         catch (Exception ex)
         {
@@ -122,4 +158,37 @@ public class ScheduleService(
         return occupied != null; // Termin je slobodan za datog frizera
     }
 
+
+    public async Task<List<FreeAppointmentsCheckDto>> GetAllFreeAppointmentsQuery(DateTime selectedDate, Guid barberId, CancellationToken cancellationToken)
+    {
+        var occupiedAppointments = await dbContext.Appointments
+            .Where(x => x.Time.Date == selectedDate.Date && x.Barberid == barberId)
+            .ToListAsync(cancellationToken);
+
+        var occupiedTimes = occupiedAppointments
+            .Select(app => app.Time) // Čuvamo puni DateTime sa vremenom
+            .ToList();
+        
+        var barberWorkTime = await dbContext.Barbers
+            .Where(x=> x.BarberId == barberId)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        var startTime = selectedDate.Date.AddHours(barberWorkTime.IndividualStartTime.Hours)
+            .AddMinutes(barberWorkTime.IndividualStartTime.Minutes);
+
+        var endTime = selectedDate.Date.AddHours(barberWorkTime.IndividualEndTime.Hours)
+            .AddMinutes(barberWorkTime.IndividualEndTime.Minutes);
+        
+        var list = new List<DateTime>();
+        
+        for (var i = startTime; i < endTime; i = i.AddMinutes(30))
+        {
+            list.Add(i);
+        }
+
+        list.RemoveAll(x => occupiedTimes.Contains(x));
+        var list2 = list.Select(time => new FreeAppointmentsCheckDto(barberId, time)).ToList();
+
+        return list2;
+    }
 }

@@ -24,7 +24,7 @@ public class Company
     
     [ForeignKey("CompanyOwnerId")]
     public ApplicationUser Owner { get; set; }
-    public IList<Haircuts> Haircuts { get; private set; } = new List<Haircuts>();
+    public IList<Haircut> Haircuts { get; private set; } = new List<Haircut>();
     
     public Company AddImage(IList<string?> imageUrl)
     {

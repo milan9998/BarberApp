@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Hair.Infrastructure.Domain.HaircutsConfiguration;
 
-public class HaircutConfiguration : IEntityTypeConfiguration<Haircuts>
+public class HaircutConfiguration : IEntityTypeConfiguration<Haircut>
 {
-    public void Configure(EntityTypeBuilder<Haircuts> builder)
+    public void Configure(EntityTypeBuilder<Haircut> builder)
     {
         builder.ToTable("Haircuts");
         builder.Property(c => c.Id).ValueGeneratedNever();

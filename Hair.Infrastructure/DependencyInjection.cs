@@ -20,6 +20,7 @@ public static class DependencyInjection
         services.AddScoped<INotificationService, VonageNotificationService>();
         services.AddScoped<IAdminSeederService, AdminSeederService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IOwnerService, OwnerService>();
         
         return services;
     }

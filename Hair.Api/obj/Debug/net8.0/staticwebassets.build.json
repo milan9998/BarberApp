@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tksyUji/Af+gCU78cSKSi3z2I17T3NfMikSPsprzslA=",
+  "Hash": "GjSUKnmPlAalXCZKnnIEsv900V2/zqWoiHhAi5u97S0=",
   "Source": "Hair.Api",
   "BasePath": "_content/Hair.Api",
   "Mode": "Default",
@@ -3454,6 +3454,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\companies\\ecbe12c9-d05a-4fcc-a785-96e648e9cf88.png"
+    },
+    {
+      "Identity": "C:\\Users\\proni\\RiderProjects\\HairCutApp\\Hair.Api\\wwwroot\\images\\companies\\edc96d5c-096c-47b1-898c-0a7725e15837.jpg",
+      "SourceId": "Hair.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\proni\\RiderProjects\\HairCutApp\\Hair.Api\\wwwroot\\",
+      "BasePath": "_content/Hair.Api",
+      "RelativePath": "images/companies/edc96d5c-096c-47b1-898c-0a7725e15837.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\companies\\edc96d5c-096c-47b1-898c-0a7725e15837.jpg"
     },
     {
       "Identity": "C:\\Users\\proni\\RiderProjects\\HairCutApp\\Hair.Api\\wwwroot\\images\\companies\\ee0817d8-db13-4e98-bb9c-df92f8e6d37d.jpg",

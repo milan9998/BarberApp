@@ -59,4 +59,17 @@ public class CompanyController(IHairDbContext dbContext): ApiBaseController
     {
         return Ok(await Mediator.Send(query));
     }
+
+    [HttpPost("create-haircut")]
+    public async Task<IActionResult> CreateHaircut([FromForm] CreateHaircutCommand command)
+    {
+        return Ok(await Mediator.Send(command));
+    }
+    [HttpGet("get-all-haircuts-by-companyid")]
+    public async Task<IActionResult> GetAllHaircutsByCompanyId([FromQuery] GetAllHaircutsByCompanyIdQuery query)
+    {
+        return Ok(await Mediator.Send(query));
+    }
+    
+    
 }
