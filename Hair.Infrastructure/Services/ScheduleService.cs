@@ -51,45 +51,52 @@ public class ScheduleService(
         
         var haircut = await dbContext.Haircuts.Where(x=> x.Id == schedule.haircutId).FirstOrDefaultAsync(cancellationToken);
         decimal haircutDuration = haircut.Duration;
-        int requiredSlots = (int) Math.Ceiling(haircutDuration / 30);
+        int requiredSlots = (int) Math.Ceiling(haircutDuration / 30m);
         
         //Console.WriteLine("Haircut duration: " + Math.Ceiling(haircutDuration / 30));
         
         var allFreeAppointments = await GetAllFreeAppointmentsQuery(schedule.time.Date, schedule.barberId, cancellationToken);
         var freeTimes = allFreeAppointments.Select(dto => dto.dateAndTime).ToHashSet();
-        var test = new List<DateTime>();
-        bool hasAllSlots = true;
-        var requiredTimes = new List<DateTime>(); // čuva sve vreme koje je validno
+        List<DateTime> bookedAppointmentsTimes = new List<DateTime>();
+        bool foundConsecutiveSlots = false;
+        DateTime currentCheckTime = normalizedTime;
+        
+       // var requiredTimes = new List<DateTime>(); // čuva sve vreme koje je validno
+       if (!freeTimes.Contains(currentCheckTime))
+       {
+           throw new ValidationException("The requested start time is not available.");
+       }
 
-        for (int i = 0; i < requiredSlots; i++)
-        {
-            var checkTime = schedule.time.AddMinutes(i * 30);
-            requiredTimes.Add(checkTime);
+       if (requiredSlots <= 1)
+       {
+           
+       }
+       bookedAppointmentsTimes.Add(currentCheckTime);
+       for (int i = 1; i < requiredSlots; i++)
+       {
+           currentCheckTime = normalizedTime.AddMinutes(i * 30);
+         /*  var barber = await dbContext.Barbers.FirstOrDefaultAsync(x=> x.BarberId == schedule.barberId, cancellationToken);
+           if (barber == null)
+           {
+               throw new ValidationException("Barber not found for work hour check.");
+           }*/
 
-            if (freeTimes.Contains(checkTime))
-            {
-               test.Add(checkTime);
-            }
-        }
-        
-        if (!hasAllSlots)
-        {
-            throw new ValidationException("Nema dovoljno uzastopnih termina.");
-        }
-        
-        /*
-         * vreme koje imamo pocetno koje trazi korisnik + 30minuta, proveravas u bazi da li postoji taj termin slobodan
-         * i to se radi onoliko puta koliko je requiredSlots 
-         */
-        
-        
-        
-        
-        /*  bool checkEmail = barberService.IsValidEmail(schedule.email);
-          if (!checkEmail)
-          {
-              throw new ValidationException("Invalid email address.");
-          }*/
+           if (!freeTimes.Contains(currentCheckTime))
+           {
+               foundConsecutiveSlots = false;
+               break;
+           }
+           bookedAppointmentsTimes.Add(currentCheckTime);
+           foundConsecutiveSlots = true;
+       
+       }
+
+       if (!foundConsecutiveSlots && bookedAppointmentsTimes.Count != requiredSlots)
+       {
+           throw new ValidationException($"Not enough consecutive appointments available for " +
+                                         $"a {haircutDuration}-minute haircut starting at {normalizedTime:HH:mm}.");
+       }
+       
         try
         {
             AnonymousUser anonymousUser = new AnonymousUser(
@@ -97,27 +104,21 @@ public class ScheduleService(
                 schedule.lastName,
                 schedule.email,
                 schedule.phoneNumber);
-            Appointment appointment = new Appointment(schedule.time, schedule.barberId);
+         //   Appointment appointment = new Appointment(schedule.time, schedule.barberId);
             
-            appointment.SetHaircutName(haircut.HaircutType);
-
-            appointment.SetTime(new DateTime(
-                appointment.Time.Year,
-                appointment.Time.Month,
-                appointment.Time.Day,
-                appointment.Time.Hour,
-                appointment.Time.Minute,
-                0, // Seconds set to 0
-                0, // Milliseconds set to 0
-                DateTimeKind.Utc
-            ));
-            await notificationService.SendSmsAsync(anonymousUser.PhoneNumber, "Zdravo");
-
+            foreach (var timeSlot in bookedAppointmentsTimes)
+            {
+                Appointment appointment = new Appointment(timeSlot, schedule.barberId);
+                appointment.SetHaircutName(haircut.HaircutType);
+                dbContext.Appointments.Add(appointment);
+            }
+           
+            
             dbContext.AnonymousUsers.Add(anonymousUser);
-            dbContext.Appointments.Add(appointment);
+            
             await dbContext.SaveChangesAsync(cancellationToken);
             return new ScheduleAppointmentResponseDto(anonymousUser.FirstName, anonymousUser.LastName, anonymousUser.Email,
-                anonymousUser.PhoneNumber, appointment.Time, schedule.barberId, haircut.HaircutType);
+                anonymousUser.PhoneNumber, bookedAppointmentsTimes[0], schedule.barberId, haircut.HaircutType);
         }
         catch (Exception ex)
         {

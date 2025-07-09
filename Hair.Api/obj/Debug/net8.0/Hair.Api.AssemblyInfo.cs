@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hair.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6cde3cf249ddb89bae70be10b72ee66b1b57d5d7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21283ff39124478e7787305c9d099147c9138272")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hair.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hair.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

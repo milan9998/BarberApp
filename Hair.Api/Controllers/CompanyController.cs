@@ -63,7 +63,16 @@ public class CompanyController(IHairDbContext dbContext): ApiBaseController
     [HttpPost("create-haircut")]
     public async Task<IActionResult> CreateHaircut([FromForm] CreateHaircutCommand command)
     {
-        return Ok(await Mediator.Send(command));
+        try
+        {
+            var result = await Mediator.Send(command);
+            return Ok(new { Message = result });
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new { Message = e.Message });
+        }
+        //return Ok(await Mediator.Send(command));
     }
     [HttpGet("get-all-haircuts-by-companyid")]
     public async Task<IActionResult> GetAllHaircutsByCompanyId([FromQuery] GetAllHaircutsByCompanyIdQuery query)

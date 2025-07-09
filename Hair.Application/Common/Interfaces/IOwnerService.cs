@@ -4,5 +4,5 @@ namespace Hair.Application.Common.Interfaces;
 
 public interface IOwnerService
 {
-    Task<HaircutDto> CreateHaircutByOwner(HaircutDto haircutDto, CancellationToken cancellationToken);
+    Task<string> CreateHaircutByOwner(HaircutDto haircutDto, CancellationToken cancellationToken);
 }
