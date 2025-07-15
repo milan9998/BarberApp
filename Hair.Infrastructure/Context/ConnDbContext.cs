@@ -1,6 +1,7 @@
 ﻿using Hair.Application.Common.Interfaces;
 using Hair.Domain.Entities;
 using Hair.Infrastructure.Configuration;
+using Hair.Infrastructure.Domain.ApplicationUserCompanyConfiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -33,13 +34,23 @@ public class ConnDbContext :  IdentityDbContext<ApplicationUser>, IHairDbContext
     } */
    //    => optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123");
 
+   protected override void OnModelCreating(ModelBuilder modelBuilder)
+   {
+       base.OnModelCreating(modelBuilder);
 
+       modelBuilder.ApplyConfigurationsFromAssembly(typeof(ConnDbContext).Assembly);
+
+      
+   }
     public DbSet<Company> Companies { get; set; }
     public DbSet<Barber> Barbers { get; set; }
 
     public DbSet<Haircut> Haircuts { get; set; }
     public DbSet<Appointment> Appointments { get; set; }
     public DbSet<AnonymousUser> AnonymousUsers { get; set; }
+    
+    public DbSet<ApplicationUserCompany> ApplicationUserCompany { get; set; }
+    
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {

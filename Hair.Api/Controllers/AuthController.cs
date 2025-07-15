@@ -33,4 +33,17 @@ public class AuthController : ApiBaseController
     {
         return Ok(await Mediator.Send(query, cancellationToken));
     }
+
+    [HttpGet("get-owners")]
+    public async Task<IActionResult> GetOwners([FromQuery] GetAllOwnersQuery query, CancellationToken cancellationToken)
+    {
+        return Ok(await Mediator.Send(query, cancellationToken));
+    }
+
+    [HttpPost("AssignCompanyOwner")]
+    public async Task<IActionResult> AssignCompanyOwner([FromForm] AssignCompanyOwnerCommand assignCompanyOwnerCommand)
+    {
+        return Ok(await Mediator.Send(assignCompanyOwnerCommand));
+    }
+    
 }

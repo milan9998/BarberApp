@@ -21,6 +21,8 @@ public class Barber
         //BarberId = Guid.NewGuid();
     }
 
+    public string ApplicationUserId { get; private set; }
+    public virtual ApplicationUser ApplicationUser { get; private set; }
      public Guid BarberId {get; private set;}
     public string BarberName { get; private set; }
     public string PhoneNumber { get; private set; }
@@ -29,8 +31,6 @@ public class Barber
     
   //  public string PictureUrl { get; private set; }//****** dodati
     public string Email { get; private set; }
-    
-    
     
     public Company Company { get; private set; }
    
@@ -46,5 +46,9 @@ public class Barber
         return this;
     }
 
+    public void SetApplicationUserId(string userId)
+    {
+        ApplicationUserId = userId;
+    }
 
 }

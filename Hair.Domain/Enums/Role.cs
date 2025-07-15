@@ -4,7 +4,8 @@
 public enum Role
 {
     RegisteredUser = 0,
-    CompanyOwner = 1,
-    Admin = 2
-    //barber = 1 
+    Barber = 1,
+    CompanyOwner = 2,
+    Admin = 3
+
 }

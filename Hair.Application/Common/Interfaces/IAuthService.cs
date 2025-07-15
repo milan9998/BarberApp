@@ -1,10 +1,11 @@
 ﻿using Hair.Application.Common.Dto.Auth;
+using Hair.Application.Common.Dto.Company;
 
 namespace Hair.Application.Common.Interfaces;
 
 public interface IAuthService
 {
-    Task<AuthLevelDto> Login(LoginDto loginDto, CancellationToken cancellationToken);
+    Task<AuthResponseDto> Login(LoginDto loginDto, CancellationToken cancellationToken);
     
     Task<AuthLevelDto> RegisterAsync(RegisterDto registerDto, CancellationToken cancellationToken);
 
@@ -13,4 +14,6 @@ public interface IAuthService
 
     Task<bool> CheckIfCompanyOwnerExistsAsync(Guid companyId, CancellationToken cancellationToken);
 
+    Task<AssignCompanyOwnerDto> AssignCompanyOwnerAsync(AssignCompanyOwnerDto assignCompanyOwnerDto,
+        CancellationToken cancellationToken);
 }

@@ -7,9 +7,11 @@ public class ApplicationUser : IdentityUser
 {
     public Role Role { get; set; }
     
-    public Guid? CompanyId { get; set; }
+   // public Guid? CompanyId { get; set; }
     
-    public IList<Company> Companies { get; set; } = new List<Company>();
+   public ICollection<ApplicationUserCompany> OwnedCompanies { get; set; }
+   
+    public virtual Barber Barber { get; set; }
     
     public string FirstName { get; set; }
     public string LastName { get; set; }

@@ -4,7 +4,7 @@ namespace Hair.Application.Common.Interfaces;
 
 public interface IBarberService
 {
-    Task<BarberCreateDto> BarberCreateAsync(
+    Task<BarberResponseDto> BarberCreateAsync(
         BarberCreateDto barberCreateDto, 
         CancellationToken cancellationToken
     );

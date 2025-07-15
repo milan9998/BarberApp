@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hair.Application.Barbers.Commands;
 
-public record BarberCreateCommand(BarberCreateDto Barber) : IRequest<BarberCreateDto?>;
+public record BarberCreateCommand(BarberCreateDto Barber) : IRequest<BarberResponseDto?>;
 
-public class BarberCreateCommandHandler(IBarberService barberService) : IRequestHandler<BarberCreateCommand, BarberCreateDto?>
+public class BarberCreateCommandHandler(IBarberService barberService) : IRequestHandler<BarberCreateCommand, BarberResponseDto?>
 {
-    public async Task<BarberCreateDto?> Handle(BarberCreateCommand request, CancellationToken cancellationToken)
+    public async Task<BarberResponseDto?> Handle(BarberCreateCommand request, CancellationToken cancellationToken)
     {
         var x = await barberService.BarberCreateAsync(request.Barber, cancellationToken);
         return x;

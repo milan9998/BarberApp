@@ -10,6 +10,7 @@ public interface IHairDbContext
     public DbSet<Appointment> Appointments { get; set; }
     public DbSet<AnonymousUser> AnonymousUsers { get; set; }
     public DbSet<Haircut> Haircuts { get; set; }
+    public DbSet<ApplicationUserCompany> ApplicationUserCompany { get; set; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     
