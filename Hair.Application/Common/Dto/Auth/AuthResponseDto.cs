@@ -2,6 +2,7 @@
 
 public record AuthResponseDto(
     string Email, 
-    string Role
-    //Guid? CompanyId
+    string Role,
+    List<Domain.Entities.Company> Companies
+    
     );

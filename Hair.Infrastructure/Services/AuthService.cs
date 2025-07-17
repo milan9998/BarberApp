@@ -28,7 +28,7 @@ public class AuthService(
         {
             throw new Exception("Invalid password");
         }
-
+        var allCompanies = await dbContext.Companies.ToListAsync(cancellationToken);
         /* if (user.Role != Role.Admin)
          {
              throw new Exception("Invalid role");
@@ -38,7 +38,7 @@ public class AuthService(
             await signInManager.PasswordSignInAsync(user, loginDto.Password, isPersistent: false,
                 lockoutOnFailure: false);
         return new AuthResponseDto(user.Email,
-            roleName
+            roleName,allCompanies
             //user.CompanyId
         );
     }
