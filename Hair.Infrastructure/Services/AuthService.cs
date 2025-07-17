@@ -28,19 +28,18 @@ public class AuthService(
         {
             throw new Exception("Invalid password");
         }
-        var allCompanies = await dbContext.Companies.ToListAsync(cancellationToken);
+
+        var allCompanies = await dbContext.ApplicationUserCompany
+            .Where(i => i.ApplicationUserId == user.Id)
+            .Select(c => c.CompanyId).ToListAsync();
         /* if (user.Role != Role.Admin)
          {
              throw new Exception("Invalid role");
          }*/
         var roleName = Enum.GetName(typeof(Role), user.Role);
-        var result =
-            await signInManager.PasswordSignInAsync(user, loginDto.Password, isPersistent: false,
+        var result = await signInManager.PasswordSignInAsync(user, loginDto.Password, isPersistent: false,
                 lockoutOnFailure: false);
-        return new AuthResponseDto(user.Email,
-            roleName,allCompanies
-            //user.CompanyId
-        );
+        return new AuthResponseDto(user.Email, roleName,allCompanies);
     }
 
     public async Task<AssignCompanyOwnerDto> AssignCompanyOwnerAsync(AssignCompanyOwnerDto assignCompanyOwnerDto,

@@ -3,6 +3,6 @@
 public record AuthResponseDto(
     string Email, 
     string Role,
-    List<Domain.Entities.Company> Companies
+    List<Guid> Companies
     
     );
