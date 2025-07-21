@@ -1,5 +1,6 @@
 ﻿using Hair.Application.Auth.Commands;
 using Hair.Application.Auth.Queries;
+using Hair.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,11 @@ namespace Hair.Api.Controllers;
 [Route("auth")]
 public class AuthController : ApiBaseController
 {
+    [HttpGet("test/conflict")]
+    public IActionResult TestConflict()
+    {
+        throw new AppointmentConflictException("Test sukob termina.");
+    }
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromForm] LoginCommand loginCommand)
     {

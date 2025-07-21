@@ -16,4 +16,8 @@
       <ProjectReference Include="..\Hair.Infrastructure\Hair.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\images\companies\" />
+    </ItemGroup>
+
 </Project>

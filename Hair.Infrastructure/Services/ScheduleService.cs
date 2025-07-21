@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using Hair.Application.Common.Dto.Schedule;
+using Hair.Application.Common.Exceptions;
 using Hair.Application.Common.Interfaces;
 using Hair.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Twilio.TwiML.Voice;
 using ValidationException = FluentValidation.ValidationException;
 
 namespace Hair.Infrastructure.Services;
@@ -46,7 +48,8 @@ public class ScheduleService(
         var x = await IsAppointmentAvailable(schedule.barberId, normalizedTime, cancellationToken);
         if (x)
         {
-            throw new ValidationException("Schedule appointment already exists.");
+            throw new AppointmentConflictException("Schedule appointment already exists TEST .");
+            
         }
         
         var haircut = await dbContext.Haircuts.Where(x=> x.Id == schedule.haircutId).FirstOrDefaultAsync(cancellationToken);
@@ -120,9 +123,9 @@ public class ScheduleService(
             return new ScheduleAppointmentResponseDto(anonymousUser.FirstName, anonymousUser.LastName, anonymousUser.Email,
                 anonymousUser.PhoneNumber, bookedAppointmentsTimes[0], schedule.barberId, haircut.HaircutType);
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            throw new Exception(ex.Message);
+            throw  exception;
         }
     }
 

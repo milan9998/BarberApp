@@ -25,7 +25,13 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
+builder.Services.AddScoped<ApiExceptionFilterAttribute>();
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ApiExceptionFilterAttribute>();  
+});
+//builder.Services.AddControllers();
 //options => options.Filters.Add<ApiExceptionFilterAttribute>()
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
@@ -36,26 +42,12 @@ builder.Services.AddScoped<IHairDbContext, ConnDbContext>();
 builder.Services.AddDbContext<ConnDbContext>(options =>     
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//builder.Services.AddScoped<ApiExceptionFilterAttribute>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ConnDbContext>()
     .AddDefaultTokenProviders();
 
-/*builder.Services.AddIdentity<Barber, IdentityRole<Guid>>(options =>
-    {
-        options.Password.RequireDigit = true;
-        options.Password.RequiredLength = 6;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = true;
-        options.Password.RequireLowercase = true;
-    })
-    .AddEntityFrameworkStores<ConnDbContext>()
-    .AddDefaultTokenProviders();*/
-
-/*
-builder.Services.Configure<PostgresDbConfiguration>(
-    builder.Configuration.GetSection("PostgresDbConfiguration"));
-*/
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
@@ -66,7 +58,7 @@ using (var scope = app.Services.CreateScope())
     await AdminSeederService.SeedRolesAsync(roleManager);
 }
 
-app.UseExceptionHandler(errorApp =>
+/*app.UseExceptionHandler(errorApp =>
 {
     errorApp.Run(async context =>
     {
@@ -80,7 +72,7 @@ app.UseExceptionHandler(errorApp =>
             await context.Response.WriteAsJsonAsync(err);
         }
     });
-});
+});*/
 
 app.UseStaticFiles();
 

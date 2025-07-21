@@ -1,13 +1,14 @@
-﻿
+﻿using Hair.Application.Common.Exceptions;
 using Hair.Application.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Hair.Api.Filters;
 
-public class ApiExceptionFilterAttribute: ExceptionFilterAttribute
+public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {
-     private readonly IDictionary<Type, Action<ExceptionContext>> _exceptionHandlers;
+    // Mapa tipova exceptiona i metoda koji ih obrađuju
+    private readonly IDictionary<Type, Action<ExceptionContext>> _exceptionHandlers;
 
     public ApiExceptionFilterAttribute()
     {
@@ -16,30 +17,52 @@ public class ApiExceptionFilterAttribute: ExceptionFilterAttribute
             { typeof(ValidationExceptions), HandleValidationException },
             { typeof(FluentValidation.ValidationException), HandleFluentValidationException },
             { typeof(NotFoundException), HandleNotFoundException },
-            { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException }
+            { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
+            { typeof(AppointmentConflictException), HandleAppointmentConflictException },
+            { typeof(AppointmentConsecutiveException), HandleAppointmentConsecutiveException }
         };
     }
 
+    // Ovo je JEDINI OnException metod u klasi
     public override void OnException(ExceptionContext context)
     {
+        Console.WriteLine("Exception caught in filter: " + context.Exception.GetType().Name);
         HandleException(context);
-
-        base.OnException(context);
     }
 
+    // Odlučuje koji handler da pozove na osnovu tipa exceptiona
     private void HandleException(ExceptionContext context)
     {
-        var type = context.Exception.GetType();
-        if (_exceptionHandlers.TryGetValue(type,
-                out var handler))
+        var exceptionType = context.Exception.GetType();
+        if (_exceptionHandlers.TryGetValue(exceptionType, out var handler))
         {
             handler.Invoke(context);
             return;
         }
 
+        
         HandleUnknownException(context);
     }
 
+    //
+    private void HandleAppointmentConflictException(ExceptionContext context)
+    {
+        var details = new ProblemDetails
+        {
+            Title = "Sukob termina",
+            Detail = context.Exception.Message,
+            Status = StatusCodes.Status409Conflict
+        };
+
+        context.Result = new ObjectResult(details)
+        {
+            StatusCode = StatusCodes.Status409Conflict
+        };
+
+        context.ExceptionHandled = true;
+    }
+
+   
     private void HandleUnknownException(ExceptionContext context)
     {
         var details = new ProblemDetails
@@ -57,14 +80,13 @@ public class ApiExceptionFilterAttribute: ExceptionFilterAttribute
         context.ExceptionHandled = true;
     }
 
+   
     private void HandleFluentValidationException(ExceptionContext context)
     {
         var exception = (FluentValidation.ValidationException)context.Exception;
         var failures = exception.Errors
-            .GroupBy(e => e.PropertyName,
-                e => e.ErrorMessage)
-            .ToDictionary(x => x.Key,
-                x => x.ToArray());
+            .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
+            .ToDictionary(g => g.Key, g => g.ToArray());
 
         var details = new ValidationProblemDetails(failures)
         {
@@ -72,10 +94,10 @@ public class ApiExceptionFilterAttribute: ExceptionFilterAttribute
         };
 
         context.Result = new BadRequestObjectResult(details);
-
         context.ExceptionHandled = true;
     }
 
+  
     private void HandleNotFoundException(ExceptionContext context)
     {
         var exception = (NotFoundException)context.Exception;
@@ -88,10 +110,10 @@ public class ApiExceptionFilterAttribute: ExceptionFilterAttribute
         };
 
         context.Result = new NotFoundObjectResult(details);
-
         context.ExceptionHandled = true;
     }
 
+   
     private void HandleUnauthorizedAccessException(ExceptionContext context)
     {
         var details = new ProblemDetails
@@ -109,6 +131,7 @@ public class ApiExceptionFilterAttribute: ExceptionFilterAttribute
         context.ExceptionHandled = true;
     }
 
+   
     private void HandleValidationException(ExceptionContext context)
     {
         var exception = (ValidationExceptions)context.Exception;
@@ -119,7 +142,9 @@ public class ApiExceptionFilterAttribute: ExceptionFilterAttribute
         };
 
         context.Result = new BadRequestObjectResult(details);
-
         context.ExceptionHandled = true;
     }
+
+ 
+    
 }
