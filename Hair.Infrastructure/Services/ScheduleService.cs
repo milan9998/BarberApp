@@ -96,8 +96,8 @@ public class ScheduleService(
 
        if (!foundConsecutiveSlots && bookedAppointmentsTimes.Count != requiredSlots)
        {
-           throw new ValidationException($"Not enough consecutive appointments available for " +
-                                         $"a {haircutDuration}-minute haircut starting at {normalizedTime:HH:mm}.");
+           throw new AppointmentConsecutiveException(
+               $"Nema dovoljno uzastopnih slobodnih termina za ovaj tretman koji ste izabrali  {haircutDuration}  minuta, izaberite drugi termin.");
        }
        
         try

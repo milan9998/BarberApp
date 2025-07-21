@@ -2,8 +2,7 @@
 
 public class AppointmentConflictException : BaseException
 {
-    public AppointmentConflictException(string? message, object? additionalData = null)
-        : base(message, additionalData)
+    public AppointmentConflictException(string? message, object? additionalData = null) : base(message, additionalData)
     {
     }
 }

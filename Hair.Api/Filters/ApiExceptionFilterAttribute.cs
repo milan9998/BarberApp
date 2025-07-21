@@ -19,8 +19,25 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
             { typeof(NotFoundException), HandleNotFoundException },
             { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
             { typeof(AppointmentConflictException), HandleAppointmentConflictException },
-            
+            {typeof(AppointmentConsecutiveException), AppointmentConsecutiveException }
         };
+    }
+
+    private void AppointmentConsecutiveException(ExceptionContext context)
+    {
+        var details = new ProblemDetails
+        {
+            Title = "Nema dovoljno slobodnih uzastopnih termina u odabrano vreme",
+            Detail = context.Exception.Message,
+            Status = StatusCodes.Status400BadRequest
+        };
+
+        context.Result = new ObjectResult(details)
+        {
+            StatusCode = StatusCodes.Status400BadRequest
+        };
+
+        context.ExceptionHandled = true;
     }
 
     // Ovo je JEDINI OnException metod u klasi
