@@ -19,7 +19,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
             { typeof(NotFoundException), HandleNotFoundException },
             { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
             { typeof(AppointmentConflictException), HandleAppointmentConflictException },
-            { typeof(AppointmentConsecutiveException), HandleAppointmentConsecutiveException }
+            
         };
     }
 
