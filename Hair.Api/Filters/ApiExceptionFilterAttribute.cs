@@ -9,9 +9,11 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {
     // Mapa tipova exceptiona i metoda koji ih obrađuju
     private readonly IDictionary<Type, Action<ExceptionContext>> _exceptionHandlers;
+    private readonly ILogger<ApiExceptionFilterAttribute> _logger;
 
-    public ApiExceptionFilterAttribute()
+    public ApiExceptionFilterAttribute(ILogger<ApiExceptionFilterAttribute> logger)
     {
+        _logger = logger;
         _exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>>
         {
             { typeof(ValidationExceptions), HandleValidationException },
@@ -40,9 +42,10 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         context.ExceptionHandled = true;
     }
 
-    // Ovo je JEDINI OnException metod u klasi
+   
     public override void OnException(ExceptionContext context)
     {
+        _logger.LogError(context.Exception, "Greška uhvaćena: {ExceptionType}", context.Exception.GetType().Name);
         Console.WriteLine("Exception caught in filter: " + context.Exception.GetType().Name);
         HandleException(context);
     }

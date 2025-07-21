@@ -11,8 +11,24 @@ using Hair.Infrastructure.Services;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug() // minimalni nivo logovanja (može i Information ili Warning)
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning) // manje detalja za Microsoft namespace
+    .Enrich.FromLogContext()
+    .WriteTo.Console() // log u konzolu
+    .WriteTo.File(
+        "Logs/logs-.txt",               // folder Logs i fajl sa dnevnim rotiranjem
+        rollingInterval: RollingInterval.Day,
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}"
+    )
+    .CreateLogger();
+
+// POVEZI SERILOG SA HOST BUILDEROM
+builder.Host.UseSerilog();
 
 builder.Services.AddCors(options =>
 {

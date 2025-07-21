@@ -5,6 +5,7 @@ using Hair.Application.Common.Exceptions;
 using Hair.Application.Common.Interfaces;
 using Hair.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Twilio.TwiML.Voice;
 using ValidationException = FluentValidation.ValidationException;
 
@@ -18,8 +19,7 @@ namespace Hair.Infrastructure.Services;
  */
 public class ScheduleService(
     IHairDbContext dbContext,
-    IBarberService barberService,
-    INotificationService notificationService) : IScheduleService
+    ILogger<ScheduleService> _logger) : IScheduleService
 {
 
     public async Task<ScheduleAppointmentResponseDto> CreateScheduleAppointmentAsync(
@@ -48,7 +48,7 @@ public class ScheduleService(
         var x = await IsAppointmentAvailable(schedule.barberId, normalizedTime, cancellationToken);
         if (x)
         {
-            throw new AppointmentConflictException("Schedule appointment already exists TEST .");
+            throw new AppointmentConflictException("Schedule appointment already exists.");
             
         }
         
@@ -125,6 +125,7 @@ public class ScheduleService(
         }
         catch (Exception exception)
         {
+            _logger.LogError(exception, "Detaljan opis gde i šta se desilo u ScheduleService");
             throw  exception;
         }
     }

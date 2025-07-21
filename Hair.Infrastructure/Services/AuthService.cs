@@ -7,13 +7,14 @@ using Hair.Domain.Enums;
 using Hair.Infrastructure.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Hair.Infrastructure.Services;
 
 public class AuthService(
     UserManager<ApplicationUser> userManager,
     SignInManager<ApplicationUser> signInManager,
-    IHairDbContext dbContext) : IAuthService
+    IHairDbContext dbContext, ILogger<AuthService> _logger) : IAuthService
 {
     public async Task<AuthResponseDto> Login(LoginDto loginDto, CancellationToken cancellationToken)
     {
@@ -59,6 +60,7 @@ public class AuthService(
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Detaljan opis gde i šta se desilo u AuthService");
             throw new Exception("Unable to assign company to user", ex);
         }
 
@@ -125,6 +127,7 @@ public class AuthService(
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Detaljan opis gde i šta se desilo u AuthService");
             throw new Exception($"Greška prilikom kreiranja vlasnika: {ex.Message}");
         }
     }

@@ -293,3 +293,13 @@ C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.genru
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\ref\Hair.Api.dll
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\obj\Debug\net8.0\Hair.Api.sourcelink.json
 C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Hair.Api.staticwebassets.runtime.json
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Serilog.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\Users\proni\RiderProjects\HairCutApp\Hair.Api\bin\Debug\net8.0\Serilog.Sinks.File.dll
