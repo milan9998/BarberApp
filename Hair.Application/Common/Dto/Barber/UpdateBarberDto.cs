@@ -1,12 +1,10 @@
 ﻿namespace Hair.Application.Common.Dto.Barber;
 
-public record BarberDetailsDto(
-    Guid BarberId, 
-    string BarberName, 
-    string CompanyName,
+public record UpdateBarberDto(
+    Guid BarberId,
+    string BarberName,
     string PhoneNumber,
     string Email,
-    Guid CompanyId,
     TimeSpan IndividualStartTime,
     TimeSpan IndividualEndTime
 );

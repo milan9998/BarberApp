@@ -6,7 +6,8 @@ namespace Hair.Application.Common.Interfaces;
 public interface IAuthService
 {
     Task<AuthResponseDto> Login(LoginDto loginDto, CancellationToken cancellationToken);
-    
+
+    Task<List<CompanyDetailsDto>> GetCompaniesByOwnerEmailAsync(string email, CancellationToken cancellationToken);
     Task<AuthLevelDto> RegisterAsync(RegisterDto registerDto, CancellationToken cancellationToken);
 
     Task<CompanyOwnerResponseDto> CreateCompanyOwnerAsync(CompanyOwnerDto companyOwnerDto,

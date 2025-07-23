@@ -62,13 +62,85 @@ public class BarberService (IHairDbContext dbContext,UserManager<ApplicationUser
         await dbContext.SaveChangesAsync(cancellationToken);
         return new BarberResponseDto(barber.BarberId,barber.BarberName, barber.PhoneNumber, barber.Email, barber.IndividualStartTime, barber.IndividualEndTime);
     }
+    public async Task<string> DeleteBarberAsync(Guid barberId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var barberToDelete = await dbContext.Barbers.Where(x => x.BarberId == barberId)
+                .FirstOrDefaultAsync(cancellationToken);
+            if (barberToDelete == null)
+            {
+                throw new Exception($"Frizer sa id-jem {barberId} nije pronadjen!");
+            }
+         
+
+            barberToDelete.UnsetCompany();
+            
+            await dbContext.SaveChangesAsync(cancellationToken);
+
+            return "Uspešno obrisan frizer!";
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
     
+    public async Task<string> UpdateBarberAsync(UpdateBarberDto updateBarberDto, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var barber = await dbContext.Barbers.Where(x => x.BarberId == updateBarberDto.BarberId)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (barber == null)
+            {
+                throw new Exception($"Barber with id {updateBarberDto.BarberId} was not found");
+            }
+            var appBarberUser = await userManager.FindByIdAsync(barber.ApplicationUserId);
+            if (appBarberUser == null)
+            { 
+                throw new Exception($"Frizer sa id-jem {barber.ApplicationUserId} nije pronadjen!");
+            }
+        
+            barber.UpdateBarberName(updateBarberDto.BarberName);
+            barber.UpdateBarberPhoneNumber(updateBarberDto.PhoneNumber);
+            barber.UpdateBarberEmail(updateBarberDto.Email);
+            barber.UpdateIndividualStartTime(updateBarberDto.IndividualStartTime);
+            barber.UpdateIndividualEndTime(updateBarberDto.IndividualEndTime);
+
+            appBarberUser.FirstName = updateBarberDto.BarberName;
+            appBarberUser.LastName = updateBarberDto.BarberName;
+            appBarberUser.PhoneNumber = updateBarberDto.PhoneNumber;
+            appBarberUser.Email = updateBarberDto.Email;
+            appBarberUser.NormalizedEmail = updateBarberDto.Email.ToUpper();
+            appBarberUser.NormalizedUserName = updateBarberDto.Email.ToUpper();
+            appBarberUser.UserName = updateBarberDto.Email;
+        
+            await dbContext.SaveChangesAsync(cancellationToken);
+            await userManager.UpdateAsync(appBarberUser);
+        
+            return "Frizer uspešno izmenjen!";
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
     
 
     public async Task<List<BarberDetailsDto>> GetAllBarbersAsync(Guid companyId, CancellationToken cancellationToken)
     {
         var barbers = await dbContext.Barbers.Where(x => x.Company.Id == companyId)
-            .Select(x=> new BarberDetailsDto(x.BarberId, x.BarberName, x.Company.CompanyName))
+            .Select(x=> new BarberDetailsDto(
+                x.BarberId,
+                x.BarberName,
+                x.Company.CompanyName,
+                x.PhoneNumber,
+                x.Email,
+                x.Company.Id,
+                x.IndividualStartTime,
+                x.IndividualEndTime))
             .ToListAsync();
 
         return barbers;

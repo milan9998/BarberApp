@@ -3,7 +3,7 @@
 public record CompanyOwnerDetails(
     string OwnerId,
     string Email, 
-    //Guid? CompanyId, 
-    string Name,
+    string FirstName,
+    string LastName,
     string PhoneNumber
-    );
+);

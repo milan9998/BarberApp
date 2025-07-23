@@ -30,6 +30,11 @@ public class Company
         ImageUrl = imageUrl;
         return this;
     }
+    public Company UpdateCompanyName(string companyName)
+    {
+        CompanyName = companyName;
+        return this;
+    }
 
    /* public Company SetCompanyOwnerId(string companyOwnerId)
     {

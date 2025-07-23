@@ -11,6 +11,9 @@ public interface ICompanyService
         CancellationToken cancellationToken
     );
 
+    Task<string> UpdateCompanyAsync(UpdateCompanyDto updateCompanyDto, CancellationToken cancellationToken);
+
+    Task<string> DeleteCompanyByCompanyIdAsync(Guid companyId, CancellationToken cancellationToken);
 
     Task<List<BarberFullDetailsDto>> CompanyDetailsByIdAsync(
         Guid companyId,

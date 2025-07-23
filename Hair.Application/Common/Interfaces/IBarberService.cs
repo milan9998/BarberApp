@@ -8,7 +8,10 @@ public interface IBarberService
         BarberCreateDto barberCreateDto, 
         CancellationToken cancellationToken
     );
-    
+
+    Task<string> DeleteBarberAsync(Guid barberId, CancellationToken cancellationToken);
+
+    Task<string> UpdateBarberAsync(UpdateBarberDto updateBarberDto, CancellationToken cancellationToken);
     Task<List<BarberDetailsDto>> GetAllBarbersAsync(
         Guid companyId, 
         CancellationToken cancellationToken

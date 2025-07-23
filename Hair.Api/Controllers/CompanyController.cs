@@ -17,34 +17,17 @@ namespace Hair.Api.Controllers;
 [Route("company")]
 public class CompanyController(IHairDbContext dbContext): ApiBaseController
 {
-    
-/*
-    [HttpPost("create")]
-    public async Task<ActionResult<Company>> CreateCompanyAsync([FromForm]CompanyCreateCommand company)
-    {
-        try
-        {
-            var result = await Mediator.Send(company);
-            return Ok(new { Message = "Company created", Data = result });
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new { Message = "Error", Data = ex.Message });
-        }
-        
-    }*/
-
-    [HttpPost("create-company")]
+ [HttpPost("create-company")]
     public async Task<IActionResult> CreateCompany([FromForm] CompanyCreateRequestDto request)
     {
         var command = new CompanyCreateCommand(request.CompanyName, request.Image);
         var result = await Mediator.Send(command);
         return Ok(result);
     }
-    
-    
+   
+
     [HttpGet("getCompanyById")]
-    public async Task<ActionResult<Company>> GetCompanyByIdAsync([FromQuery] CompanyDetailsQuery query)
+    public async Task<ActionResult<Company>> GetCompanyAsync([FromQuery] CompanyDetailsQuery query)
     {
         return Ok(await Mediator.Send(query));
     }
@@ -54,31 +37,58 @@ public class CompanyController(IHairDbContext dbContext): ApiBaseController
     {
         return Ok(await Mediator.Send(new GetAllCompaniesQuery(CompanyDetailsDto: new CompanyDetailsDto())));
     }
+    
     [HttpGet("getCompanyDetailsById")]
     public async Task<ActionResult<Company>> GetCompanyDetailsByIdAsync([FromQuery] CompanyDetailsByIdQuery query)
     {
         return Ok(await Mediator.Send(query));
     }
-
-    [HttpPost("create-haircut")]
-    public async Task<IActionResult> CreateHaircut([FromForm] CreateHaircutCommand command)
+    
+    [HttpPut("update-company")]
+    public async Task<IActionResult> UpdateCompanyAsync([FromForm] UpdateCompanyCommand command)
     {
-        try
-        {
-            var result = await Mediator.Send(command);
-            return Ok(new { Message = result });
-        }
-        catch (Exception e)
-        {
-            return BadRequest(new { Message = e.Message });
-        }
-        //return Ok(await Mediator.Send(command));
+        return Ok(await Mediator.Send(command));
     }
+
+    [HttpDelete("delete-company")]
+    public async Task<IActionResult> DeleteCompanyByCompanyIdAsync([FromQuery] DeleteCompanyCommand command)
+    {
+        return Ok(await Mediator.Send(command));
+    }
+    
+    
+    /* Haircuts */
+    [HttpPost("create-haircut")]
+    public async Task<IActionResult> CreateHaircutAsync([FromForm] CreateHaircutCommand command)
+    {
+        var result = await Mediator.Send(command);
+        return Ok(result );
+    }
+
     [HttpGet("get-all-haircuts-by-companyid")]
     public async Task<IActionResult> GetAllHaircutsByCompanyId([FromQuery] GetAllHaircutsByCompanyIdQuery query)
     {
         return Ok(await Mediator.Send(query));
     }
     
+    [HttpGet("get-haircut-details-by-id")]
+    public async Task<IActionResult> GetHaircutDetailsByIdAsync([FromQuery] GetHaircutDetailsByIdQuery query)
+    {
+        var response = await Mediator.Send(query);
+        return Ok(response);
+    }
+
+    [HttpPut("update-haircut")]
+    public async Task<IActionResult> UpdateHaircutAsync([FromForm] UpdateHaircutCommand updateHaircutCommand)
+    {
+        var response = await Mediator.Send(updateHaircutCommand);
+        return Ok(response);
+    }
     
+    [HttpDelete("delete-haircut")]
+    public async Task<IActionResult> DeleteHaircutAsync([FromQuery] DeleteHaircutCommand deleteHaircutCommand)
+    {
+        var response = await Mediator.Send(deleteHaircutCommand);
+        return Ok(response);
+    }
 }

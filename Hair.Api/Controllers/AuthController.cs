@@ -51,5 +51,16 @@ public class AuthController : ApiBaseController
     {
         return Ok(await Mediator.Send(assignCompanyOwnerCommand));
     }
+    [HttpGet("get-companies-by-owner-email")]
+    public async Task<IActionResult> GetCompaniesByOwnerEmailAsync([FromQuery] GetCompaniesByOwnerEmailQuery query)
+    {
+        return Ok(await Mediator.Send(query));
+    }
+    [HttpGet("get-owner-details")]
+    public async Task<IActionResult> GetOwnerDetailsById([FromQuery] GetOwnerDetailsByIdQuery query,
+        CancellationToken cancellationToken)
+    {
+        return Ok(await Mediator.Send(query, cancellationToken));
+    }
     
 }

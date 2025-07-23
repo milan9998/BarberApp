@@ -30,5 +30,24 @@ public class BarberController(IHairDbContext dbContext) : ApiBaseController
     {
         return Ok(await Mediator.Send(query));
     }
+    [HttpGet("get-barber-details-by-barber-id")]
+    public async Task<IActionResult> GetBarberDetailsByBarberIdAsync([FromQuery] GetBarberDetailsByBarberId query)
+    {
+        var result = await Mediator.Send(query);
+        return Ok(result);
+    }
+
+    [HttpPut("update-barber-details")]
+    public async Task<IActionResult> UpdateBarberAsync([FromForm] UpdateBarberCommand command)
+    {
+        var result = await Mediator.Send(command);
+        return Ok(result);
+    }
     
+    [HttpDelete("delete-barber")]
+    public async Task<IActionResult> DeleteBarberAsync([FromQuery] DeleteBarberCommand deleteBarberCommand)
+    {
+        var result = await Mediator.Send(deleteBarberCommand);
+        return Ok(result);
+    }
 }

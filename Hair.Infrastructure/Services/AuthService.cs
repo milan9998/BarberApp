@@ -67,6 +67,35 @@ public class AuthService(
         return assignCompanyOwnerDto;
     }
 
+    public async Task<List<CompanyDetailsDto>> GetCompaniesByOwnerEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                throw new Exception($"Nije pronadjen email {email} vlasnika!");
+            }
+            var userId = user.Id;
+            
+            var companies = await dbContext.ApplicationUserCompany.Where(i=> i.ApplicationUserId == userId)
+                .Select(i=>i.Company).ToListAsync();
+            
+            var response = companies.Select(x=> new CompanyDetailsDto
+            {
+                CompanyId = x.Id,
+                CompanyName = x.CompanyName,
+                ImageUrl = x.ImageUrl,
+            }).ToList();
+            
+            return response;
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"Greška pri dohvatanju kompanija vlasnika sa email-om: {email}!", e);
+        }
+    }
+
     public async Task<CompanyOwnerResponseDto> CreateCompanyOwnerAsync(CompanyOwnerDto companyOwnerDto,
         CancellationToken cancellationToken)
     {

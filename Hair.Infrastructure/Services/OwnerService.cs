@@ -27,4 +27,50 @@ public class OwnerService(IHairDbContext dbContext) : IOwnerService
         }
        
     }
+    
+    public async Task<string> UpdateHaircutAsync(HaircutResponseDto haircutResponseDto, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var haircutToUpdate = await dbContext.Haircuts.FirstOrDefaultAsync(x => x.Id == haircutResponseDto.HaircutId,
+                cancellationToken);
+
+            if (haircutToUpdate == null)
+            {
+                throw new Exception("Nije pronadjena usluga za izmenu!");
+            }
+            
+            haircutToUpdate.UpdateHaircutType(haircutResponseDto.HaircutType);
+            haircutToUpdate.UpdatePrice(haircutResponseDto.Price);
+            haircutToUpdate.UpdateDuration(haircutResponseDto.Duration);
+        
+            await dbContext.SaveChangesAsync(cancellationToken);
+        
+            return "Uspešno izmenjena usluga!";
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async Task<string> DeleteHaircutByHaircutId(Guid haircutId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var haircutToDelete = await dbContext.Haircuts.FirstOrDefaultAsync(x => x.Id == haircutId, cancellationToken);
+            if (haircutToDelete == null)
+            {
+                throw new Exception("Nije pronadjena usluga za brisanje!");
+            }
+            dbContext.Haircuts.Remove(haircutToDelete);
+            await dbContext.SaveChangesAsync(cancellationToken);
+
+            return "Uspešno obrisana usluga!";
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
 }
