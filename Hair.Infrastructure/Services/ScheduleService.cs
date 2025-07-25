@@ -66,6 +66,11 @@ public class ScheduleService(
 
             //Console.WriteLine("Haircut duration: " + Math.Ceiling(haircutDuration / 30));
 
+            bool canSchedule = await CanSchedule(userExists.PhoneNumber, schedule.time);
+            if (!canSchedule)
+            {
+                throw new Exception("Možete zakazati termin samo jednom u 7 dana.");
+            }
             var allFreeAppointments =
                 await GetAllFreeAppointmentsQuery(schedule.time.Date, schedule.barberId, cancellationToken);
             var freeTimes = allFreeAppointments.Select(dto => dto.dateAndTime).ToHashSet();
@@ -112,8 +117,11 @@ public class ScheduleService(
             }
             foreach (var timeSlot in bookedAppointmentsTimes)
             {
-                Appointment appointment = new Appointment(timeSlot, schedule.barberId);
-                appointment.SetHaircutName(haircut.HaircutType);
+                Appointment appointment = new Appointment(timeSlot, schedule.barberId)
+                    .SetHaircutName(haircut.HaircutType);
+    
+                appointment.ApplicationUserId = userExists.Id; // ❗ OBAVEZNO: dodeli UserId
+
                 dbContext.Appointments.Add(appointment);
             }
             await dbContext.SaveChangesAsync(cancellationToken);
@@ -144,7 +152,16 @@ public class ScheduleService(
 
           
       }*/
+    public async Task<bool> CanSchedule(string phoneNumber, DateTime requestedDate)
+    {
+        var fromDate = requestedDate.AddDays(-6); // uključuje danas i još 6 dana unazad
+        var toDate = requestedDate.AddDays(6);    // uključuje i 6 dana unapred
 
+        return !await dbContext.Appointments
+            .AnyAsync(a => a.ApplicationUser.PhoneNumber == phoneNumber &&
+                           a.Time >= fromDate &&
+                           a.Time <= toDate);
+    }
 
         public async Task<List<GetAllSchedulesByBarberIdDto>> GetAllSchedulesByBarberIdAsync(
         Guid barberId, CancellationToken cancellationToken)

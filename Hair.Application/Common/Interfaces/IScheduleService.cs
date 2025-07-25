@@ -19,4 +19,6 @@ public interface IScheduleService
         Guid barberId,
         CancellationToken cancellationToken
     );
+
+    
 }

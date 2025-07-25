@@ -10,6 +10,7 @@ public class ApplicationUser : IdentityUser
    // public Guid? CompanyId { get; set; }
     
    public ICollection<ApplicationUserCompany> OwnedCompanies { get; set; }
+   public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
    
     public virtual Barber Barber { get; set; }
     

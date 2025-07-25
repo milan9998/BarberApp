@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hair.Domain.Entities;
 
@@ -7,6 +8,10 @@ public class Appointment
     public Guid Id { get; private set; }
     public DateTime Time { get; private set; }
     public Guid Barberid { get; private set; }
+    
+   
+    public string ApplicationUserId { get; set; }
+    public ApplicationUser ApplicationUser { get; set; }
     
     public string HaircutName { get; private set; }
 
