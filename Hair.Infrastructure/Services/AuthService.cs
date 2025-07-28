@@ -92,6 +92,7 @@ public class AuthService(
         }
         catch (Exception e)
         {
+            
             throw new Exception($"Greška pri dohvatanju kompanija vlasnika sa email-om: {email}!", e);
         }
     }
@@ -179,39 +180,48 @@ public class AuthService(
 
     public async Task<AuthLevelDto> RegisterAsync(RegisterDto dto, CancellationToken cancellationToken)
     {
-        if (dto.Password != dto.ConfirmPassword)
-            throw new Exception("Passwords do not match");
-
-        var existingUser = await userManager.FindByEmailAsync(dto.Email);
-        if (existingUser != null)
-            throw new Exception("User with this email already exists");
-
-        var user = new ApplicationUser
+        try
         {
+            if (dto.Password != dto.ConfirmPassword)
+                throw new Exception("Passwords do not match");
 
-            UserName = dto.Email,
-            Email = dto.Email,
-            PhoneNumber = dto.PhoneNumber,
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            Role = Role.RegisteredUser
-        };
+            var existingUser = await userManager.FindByEmailAsync(dto.Email);
+            if (existingUser != null)
+                throw new Exception("User with this email already exists");
 
-        var result = await userManager.CreateAsync(user, dto.Password);
-        if (!result.Succeeded)
-        {
-            var errorMsg = string.Join(", ", result.Errors.Select(e => e.Description));
-            throw new Exception(errorMsg);
+            var user = new ApplicationUser
+            {
+
+                UserName = dto.Email,
+                Email = dto.Email,
+                PhoneNumber = dto.PhoneNumber,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Role = Role.RegisteredUser
+            };
+
+            var result = await userManager.CreateAsync(user, dto.Password);
+            if (!result.Succeeded)
+            {
+                var errorMsg = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new Exception(errorMsg);
+            }
+
+
+            var roleName = Enum.GetName(typeof(Role), user.Role);
+            await userManager.AddToRoleAsync(user, roleName);
+
+
+            await signInManager.SignInAsync(user, isPersistent: false);
+
+            return new AuthLevelDto(user.Email, roleName);
         }
-
-
-        var roleName = Enum.GetName(typeof(Role), user.Role);
-        await userManager.AddToRoleAsync(user, roleName);
-
-
-        await signInManager.SignInAsync(user, isPersistent: false);
-
-        return new AuthLevelDto(user.Email, roleName);
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            throw new Exception(e.Message);
+        }
+        
     }
 
 

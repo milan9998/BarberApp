@@ -38,7 +38,7 @@ public class ScheduleService(
             var userExists = await userManager.FindByEmailAsync(schedule.email);
             if (userExists is null)
             {
-                throw new Exception("Morate biti ulogovani da bi ste zakazali tretman.");
+                throw new AppointmentConflictException("Morate biti ulogovani da bi ste zakazali tretman.");
             }
             
             DateTime normalizedTime = new DateTime(
@@ -69,7 +69,7 @@ public class ScheduleService(
             bool canSchedule = await CanSchedule(userExists.PhoneNumber, schedule.time);
             if (!canSchedule)
             {
-                throw new Exception("Možete zakazati termin samo jednom u 7 dana.");
+                throw new AppointmentConflictException("Možete zakazati termin samo jednom u 7 dana.");
             }
             var allFreeAppointments =
                 await GetAllFreeAppointmentsQuery(schedule.time.Date, schedule.barberId, cancellationToken);
@@ -120,7 +120,7 @@ public class ScheduleService(
                 Appointment appointment = new Appointment(timeSlot, schedule.barberId)
                     .SetHaircutName(haircut.HaircutType);
     
-                appointment.ApplicationUserId = userExists.Id; // ❗ OBAVEZNO: dodeli UserId
+                appointment.ApplicationUserId = userExists.Id; 
 
                 dbContext.Appointments.Add(appointment);
             }
@@ -134,7 +134,7 @@ public class ScheduleService(
             throw exception;
         }
 
-        return null;
+  
     }
     /*  try
       {
@@ -154,8 +154,8 @@ public class ScheduleService(
       }*/
     public async Task<bool> CanSchedule(string phoneNumber, DateTime requestedDate)
     {
-        var fromDate = requestedDate.AddDays(-6); // uključuje danas i još 6 dana unazad
-        var toDate = requestedDate.AddDays(6);    // uključuje i 6 dana unapred
+        var fromDate = requestedDate.AddDays(-6); 
+        var toDate = requestedDate.AddDays(6);    
 
         return !await dbContext.Appointments
             .AnyAsync(a => a.ApplicationUser.PhoneNumber == phoneNumber &&
@@ -190,10 +190,10 @@ public class ScheduleService(
     private async Task<bool> IsAppointmentAvailable(Guid barberId, DateTime time, CancellationToken cancellationToken)
     {
         var occupied = await dbContext.Appointments
-            .Where(x => x.Barberid == barberId && x.Time == time) // Proverava samo datog frizera
+            .Where(x => x.Barberid == barberId && x.Time == time) 
             .FirstOrDefaultAsync(cancellationToken);
 
-        return occupied != null; // Termin je slobodan za datog frizera
+        return occupied != null; 
     }
 
 
@@ -204,7 +204,7 @@ public class ScheduleService(
             .ToListAsync(cancellationToken);
 
         var occupiedTimes = occupiedAppointments
-            .Select(app => app.Time) // Čuvamo puni DateTime sa vremenom
+            .Select(app => app.Time) 
             .ToList();
         
         var barberWorkTime = await dbContext.Barbers

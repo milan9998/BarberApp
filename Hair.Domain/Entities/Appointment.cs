@@ -32,6 +32,12 @@ public class Appointment
         HaircutName = haircutName;
         return this;
     }
+    public Appointment SetApplicationUserId(string userId)
+    {
+        ApplicationUserId = userId;
+        return this;
+    }
+
    /* public Appointment()
     {
         
