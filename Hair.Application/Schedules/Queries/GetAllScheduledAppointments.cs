@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hair.Application.Schedules.Queries;
 
-public record GetAllScheduledAppointments(Guid barberId) : IRequest<IList<GetAllSchedulesByBarberIdDto>>;
+public record GetAllScheduledAppointments(Guid barberId) : IRequest<IList<GetAllUsedAppointmentsDto>>;
 
 public class ProductDetailsQueryHandler(IScheduleService scheduleService) 
-    : IRequestHandler<GetAllScheduledAppointments, IList<GetAllSchedulesByBarberIdDto>>
+    : IRequestHandler<GetAllScheduledAppointments, IList<GetAllUsedAppointmentsDto>>
 {
-    public async Task<IList<GetAllSchedulesByBarberIdDto>> Handle(GetAllScheduledAppointments request, 
+    public async Task<IList<GetAllUsedAppointmentsDto>> Handle(GetAllScheduledAppointments request, 
         CancellationToken cancellationToken)
     {
         var x = await scheduleService.GetAllSchedulesByBarberIdAsync(request.barberId, cancellationToken);

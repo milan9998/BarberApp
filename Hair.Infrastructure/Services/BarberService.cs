@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Hair.Infrastructure.Services;
 
-public class BarberService (IHairDbContext dbContext,UserManager<ApplicationUser> userManager, ILogger _logger) : IBarberService
+public class BarberService (IHairDbContext dbContext,UserManager<ApplicationUser> userManager, ILogger<BarberService> _logger) : IBarberService
 {
     public async Task<BarberResponseDto> BarberCreateAsync(BarberCreateDto barberCreateDto, CancellationToken cancellationToken)
     {

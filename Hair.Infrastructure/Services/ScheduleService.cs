@@ -163,16 +163,39 @@ public class ScheduleService(
                            a.Time <= toDate);
     }
 
-        public async Task<List<GetAllSchedulesByBarberIdDto>> GetAllSchedulesByBarberIdAsync(
+    public async Task<List<GetAllUsedAppointmentsDto>> GetAllSchedulesByBarberIdAsync(
         Guid barberId, CancellationToken cancellationToken)
     {
-        var appointments = await dbContext.Appointments.Where(x => barberId == x.Id).ToListAsync();
-        var result = appointments.Select(appointment => new GetAllSchedulesByBarberIdDto
-        {
-            barberId = appointment.Barberid,
-            time = appointment.Time
-        }).ToList();
+        
+        var appointments = await dbContext.Appointments.Where(x => barberId == x.Barberid)
+            .ToListAsync(cancellationToken);
+        
+        
+        var result = appointments.Select(appointment => new GetAllUsedAppointmentsDto(
+            AppointmentId: appointment.Id,
+            BarberId: appointment.Barberid,
+            Time: appointment.Time,
+            HaircutName: appointment.HaircutName,
+            ApplicationUserId: appointment.ApplicationUserId,
+            FirstName: userManager.FindByIdAsync(appointment.ApplicationUserId).Result.FirstName,
+            LastName: userManager.FindByIdAsync(appointment.ApplicationUserId).Result.LastName,
+            Email: userManager.FindByIdAsync(appointment.ApplicationUserId).Result.Email,
+            PhoneNumber: userManager.FindByIdAsync(appointment.ApplicationUserId).Result.PhoneNumber
+        )).ToList();
+        /*
+         * AppointmentId = appointment.Id,
+            BarberId = appointment.Barberid,
+            Time = appointment.Time,
+            HaircutName = appointment.HaircutName,
+            ApplicationUserId = appointment.ApplicationUserId,
+            FirstName = userManager.FindByIdAsync(appointment.ApplicationUserId).Result.FirstName,
+            LastName = userManager.FindByIdAsync(appointment.ApplicationUserId).Result.LastName,
+            Email = userManager.FindByIdAsync(appointment.ApplicationUserId).Result.Email,
+            PhoneNumber = userManager.FindByIdAsync(appointment.ApplicationUserId).Result.PhoneNumber
+         */
+        
         return result;
+        
     }
 
     private async Task<bool> IsWithinBarberWorkHours(ScheduleAppointmentCreateDto schedule,

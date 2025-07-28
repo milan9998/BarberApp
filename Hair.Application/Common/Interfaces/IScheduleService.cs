@@ -9,16 +9,15 @@ public interface IScheduleService
         CancellationToken cancellationToken
         );
 
-    Task<List<GetAllSchedulesByBarberIdDto>> GetAllSchedulesByBarberIdAsync(
-        Guid barberId,
-        CancellationToken cancellationToken
-    );
+    Task<List<GetAllUsedAppointmentsDto>> GetAllSchedulesByBarberIdAsync(
+        Guid barberId, CancellationToken cancellationToken);
 
     Task<List<FreeAppointmentsCheckDto>> GetAllFreeAppointmentsQuery(
         DateTime selectedDate,
         Guid barberId,
         CancellationToken cancellationToken
     );
+    
 
     
 }
