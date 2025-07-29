@@ -52,8 +52,8 @@ public class ScheduleService(
                 schedule.time.Kind
             );
 
-            var x = await IsAppointmentAvailable(schedule.barberId, normalizedTime, cancellationToken);
-            if (x)
+            var isAvailableCheck = await IsAppointmentAvailable(schedule.barberId, normalizedTime, cancellationToken);
+            if (isAvailableCheck)
             {
                 throw new AppointmentConflictException("Schedule appointment already exists.");
 
