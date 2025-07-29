@@ -79,5 +79,11 @@ public class ScheduleController: ApiBaseController
         return Ok(await Mediator.Send(query));
     }
 
+    [HttpDelete("DeleteAppointment")]
+    public async Task<ActionResult<Appointment>> DeleteAppointmentAsync([FromQuery] DeleteAppointmentCommand command)
+    {
+        return Ok(await Mediator.Send(command));
+    }
+
     
 }

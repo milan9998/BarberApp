@@ -219,7 +219,21 @@ public class ScheduleService(
         return occupied != null; 
     }
 
+    public async Task<FreeAppointmentsCheckDto> DeleteAppointmentByBarber(Guid barberid, DateTime selectedDate, CancellationToken cancellationToken)
+    {
+        
+        var appointmentToDelete = dbContext.Appointments.FirstOrDefault(x => x.Barberid == barberid && x.Time == selectedDate);
+        if(appointmentToDelete == null) return null;
+        
+        dbContext.Appointments.Remove(appointmentToDelete);
+        await dbContext.SaveChangesAsync(cancellationToken);
 
+
+        return new FreeAppointmentsCheckDto(barberid,  selectedDate);
+
+    }
+    
+    
     public async Task<List<FreeAppointmentsCheckDto>> GetAllFreeAppointmentsQuery(DateTime selectedDate, Guid barberId, CancellationToken cancellationToken)
     {
         var occupiedAppointments = await dbContext.Appointments
