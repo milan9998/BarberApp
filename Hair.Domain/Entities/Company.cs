@@ -19,10 +19,6 @@ public class Company
     public ICollection<ApplicationUserCompany> ApplicationUserCompanies { get; set; } = new List<ApplicationUserCompany>();
     public IList<Barber> Barbers { get; private set; } = new List<Barber>();
     
-   /* public string? CompanyOwnerId { get; set; }
-    
-    [ForeignKey("CompanyOwnerId")]
-    public ApplicationUser Owner { get; set; }*/
     public IList<Haircut> Haircuts { get; private set; } = new List<Haircut>();
     
     public Company AddImage(IList<string?> imageUrl)
@@ -35,10 +31,5 @@ public class Company
         CompanyName = companyName;
         return this;
     }
-
-   /* public Company SetCompanyOwnerId(string companyOwnerId)
-    {
-        CompanyOwnerId = companyOwnerId;
-        return this;
-    }*/
+    
 }

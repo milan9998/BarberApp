@@ -18,29 +18,40 @@ public class AuthService(
 {
     public async Task<AuthResponseDto> Login(LoginDto loginDto, CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByEmailAsync(loginDto.Email);
-        if (user == null || user.Email != loginDto.Email)
+        try
         {
-            throw new Exception("Invalid email address");
-        }
+            var user = await userManager.FindByEmailAsync(loginDto.Email);
+            if (user == null || user.Email != loginDto.Email)
+            {
+                throw new Exception("Pogrešno uneti podaci.");
+            }
+        
+            var password = await userManager.CheckPasswordAsync(user, loginDto.Password);
+            if (!password)
+            {
+                throw new Exception("Pogrešno uneti podaci.");
+            }
+            var barberId = await dbContext.Barbers.FirstOrDefaultAsync(x=>x.ApplicationUserId == user.Id, cancellationToken);
+        
+            var ownersCompanies = await dbContext.ApplicationUserCompany
+                .Where(i => i.ApplicationUserId == user.Id)
+                .Select(c => c.CompanyId).ToListAsync();
+        
+        
+            //var allOwnersCompanies = await dbContext.Companies.ToListAsync(cancellationToken);
 
-        var password = await userManager.CheckPasswordAsync(user, loginDto.Password);
-        if (!password)
+            var roleName = Enum.GetName(typeof(Role), user.Role);
+            var result = await signInManager.PasswordSignInAsync(user, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
+            return new AuthResponseDto(user.Id, user.FirstName, user.LastName, user.Email,user.PhoneNumber,
+                roleName, ownersCompanies, barberId?.BarberId);
+        }
+        catch (Exception e)
         {
-            throw new Exception("Invalid password");
+            _logger.LogError(e.Message);
+            Console.WriteLine(e);
+            throw;
         }
-
-        var allCompanies = await dbContext.ApplicationUserCompany
-            .Where(i => i.ApplicationUserId == user.Id)
-            .Select(c => c.CompanyId).ToListAsync();
-        /* if (user.Role != Role.Admin)
-         {
-             throw new Exception("Invalid role");
-         }*/
-        var roleName = Enum.GetName(typeof(Role), user.Role);
-        var result = await signInManager.PasswordSignInAsync(user, loginDto.Password, isPersistent: false,
-                lockoutOnFailure: false);
-        return new AuthResponseDto(user.Email, roleName,allCompanies);
+        
     }
 
     public async Task<AssignCompanyOwnerDto> AssignCompanyOwnerAsync(AssignCompanyOwnerDto assignCompanyOwnerDto,
@@ -161,6 +172,7 @@ public class AuthService(
             throw new Exception($"Greška prilikom kreiranja vlasnika: {ex.Message}");
         }
     }
+    
 
     public async Task<bool> CheckIfCompanyOwnerExistsAsync(Guid companyId, CancellationToken cancellationToken)
     {
@@ -177,7 +189,22 @@ public class AuthService(
 
         return false;
     }
+    public async Task<List<GetAllAppointmentsByUserIdDto>> GetAllAppointmentsByUserIdAsync(string userId, CancellationToken cancellationToken)
+    {
+        var appointments = await dbContext.Appointments.Where(x => x.ApplicationUserId == userId)
+            .ToListAsync(cancellationToken);
 
+        var response = appointments.Select(x => new GetAllAppointmentsByUserIdDto(
+            AppointmentId: x.Id,
+            Time: x.Time,
+            HaircutName: x.HaircutName,
+            BarberName: dbContext.Barbers.Where(b => b.BarberId == x.Barberid).FirstOrDefault().BarberName,
+            BarberPhone: dbContext.Barbers.Where(b => b.BarberId == x.Barberid).FirstOrDefault().PhoneNumber,
+            BarberEmail: dbContext.Barbers.Where(b => b.BarberId == x.Barberid).FirstOrDefault().Email
+        )).ToList();
+
+        return response;
+    }
     public async Task<AuthLevelDto> RegisterAsync(RegisterDto dto, CancellationToken cancellationToken)
     {
         try
@@ -223,46 +250,30 @@ public class AuthService(
         }
         
     }
-
-
-    /*
-     * public async Task<bool> RegisterOwnerAsync(RegisterDto dto)
+    public async Task<string> UpdateCompanyOwnerAsync(UpdateOwnerDto updateOwnerDto, CancellationToken cancellationToken)
     {
-        var existingUser = await _userManager.FindByEmailAsync(dto.Email);
-        if (existingUser != null) return false;
-
-        var user = new ApplicationUser
+        try
         {
-            UserName = dto.Email,
-            Email = dto.Email,
-            EmailConfirmed = true,
-            Role = UserRole.Owner
-        };
-
-        var result = await _userManager.CreateAsync(user, dto.Password);
-        if (!result.Succeeded) return false;
-
-        var company = new Company
+            var ownerToUpdate = await userManager.FindByIdAsync(updateOwnerDto.OwnerId);
+            ownerToUpdate.FirstName = updateOwnerDto.FirstName;
+            ownerToUpdate.LastName = updateOwnerDto.LastName;
+            ownerToUpdate.UserName = updateOwnerDto.Email;
+            ownerToUpdate.NormalizedUserName = updateOwnerDto.Email.ToUpper();
+            ownerToUpdate.NormalizedEmail = updateOwnerDto.Email.ToUpper();
+            ownerToUpdate.Email = updateOwnerDto.Email;
+            ownerToUpdate.PhoneNumber = updateOwnerDto.PhoneNumber;
+            
+            await userManager.UpdateAsync(ownerToUpdate);
+            return "Uspešno izmenjen vlasnik!";
+            
+        }
+        catch (Exception e)
         {
-            CompanyName = dto.CompanyName,
-            OwnerId = user.Id
-        };
-
-        _dbContext.Companies.Add(company);
-        await _dbContext.SaveChangesAsync();
-
-        return true;
+            _logger.LogError(e, "Detaljan opis gde i šta se desilo u AuthService");
+            throw new Exception("Greška pri izmeni detalja vlasnika!");
+        }
     }
-     */
 
-    /*
-          var exists = await userManager.Users
-              .Where(u => u.CompanyId == companyOwnerDto.CompanyId && u.Role == Role.CompanyOwner)
-              .FirstOrDefaultAsync(cancellationToken);
 
-          if (exists != null)
-          {
-              throw new Exception($"Company {companyOwnerDto.CompanyId} already exists");
-          }
-          */
+  
 }

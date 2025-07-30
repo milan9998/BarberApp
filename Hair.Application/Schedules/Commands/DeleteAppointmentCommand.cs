@@ -4,13 +4,13 @@ using MediatR;
 
 namespace Hair.Application.Schedules.Commands;
 
-public record DeleteAppointmentCommand(Guid BarberId, DateTime SelectedDate):IRequest<FreeAppointmentsCheckDto>;
-public class DeleteAppointmentCommandHandler(IScheduleService scheduleService) : IRequestHandler<DeleteAppointmentCommand, FreeAppointmentsCheckDto>
+public record DeleteAppointmentCommand(Guid AppointmentId) : IRequest<string>;
+
+public class DeleteAppointmentCommandHandler(IScheduleService scheduleService) : IRequestHandler<DeleteAppointmentCommand, string>
 {
-    public async Task<FreeAppointmentsCheckDto> Handle(DeleteAppointmentCommand request, CancellationToken cancellationToken)
+    public async Task<string> Handle(DeleteAppointmentCommand request, CancellationToken cancellationToken)
     {
-        var deleteAppointment = 
-            await scheduleService.DeleteAppointmentByBarber(request.BarberId, request.SelectedDate, cancellationToken);
-        return deleteAppointment;
+        var appointmentToDelete = await scheduleService.DeleteAppointmentByAppointmentIdAsync(request.AppointmentId, cancellationToken);
+        return appointmentToDelete;
     }
 }

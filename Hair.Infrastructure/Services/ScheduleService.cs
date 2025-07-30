@@ -12,12 +12,6 @@ using ValidationException = FluentValidation.ValidationException;
 
 namespace Hair.Infrastructure.Services;
 
-
-/*
-   public class ScheduleService(IHairDbContext dbContext, 
-                             INotificationService notificationService,
-                             IValidator<ScheduleAppointmentCreateDto> validator) : IScheduleService
- */
 public class ScheduleService(
     IHairDbContext dbContext,UserManager<ApplicationUser> userManager,
     ILogger<ScheduleService> _logger) : IScheduleService
@@ -64,8 +58,7 @@ public class ScheduleService(
             decimal haircutDuration = haircut.Duration;
             int requiredSlots = (int)Math.Ceiling(haircutDuration / 30m);
 
-            //Console.WriteLine("Haircut duration: " + Math.Ceiling(haircutDuration / 30));
-
+           
             bool canSchedule = await CanSchedule(userExists.PhoneNumber, schedule.time);
             if (!canSchedule)
             {
@@ -78,7 +71,7 @@ public class ScheduleService(
             bool foundConsecutiveSlots = false;
             DateTime currentCheckTime = normalizedTime;
 
-            // var requiredTimes = new List<DateTime>(); // čuva sve vreme koje je validno
+           
             if (!freeTimes.Contains(currentCheckTime))
             {
                 throw new ValidationException("The requested start time is not available.");
@@ -136,22 +129,6 @@ public class ScheduleService(
 
   
     }
-    /*  try
-      {
-          AnonymousUser anonymousUser = new AnonymousUser(
-              schedule.firstName,
-              schedule.lastName,
-              schedule.email,
-              schedule.phoneNumber);
-       //   Appointment appointment = new Appointment(schedule.time, schedule.barberId);
-
-          
-
-
-          dbContext.AnonymousUsers.Add(anonymousUser);
-
-          
-      }*/
     public async Task<bool> CanSchedule(string phoneNumber, DateTime requestedDate)
     {
         var fromDate = requestedDate.AddDays(-6); 
@@ -182,17 +159,6 @@ public class ScheduleService(
             Email: userManager.FindByIdAsync(appointment.ApplicationUserId).Result.Email,
             PhoneNumber: userManager.FindByIdAsync(appointment.ApplicationUserId).Result.PhoneNumber
         )).ToList();
-        /*
-         * AppointmentId = appointment.Id,
-            BarberId = appointment.Barberid,
-            Time = appointment.Time,
-            HaircutName = appointment.HaircutName,
-            ApplicationUserId = appointment.ApplicationUserId,
-            FirstName = userManager.FindByIdAsync(appointment.ApplicationUserId).Result.FirstName,
-            LastName = userManager.FindByIdAsync(appointment.ApplicationUserId).Result.LastName,
-            Email = userManager.FindByIdAsync(appointment.ApplicationUserId).Result.Email,
-            PhoneNumber = userManager.FindByIdAsync(appointment.ApplicationUserId).Result.PhoneNumber
-         */
         
         return result;
         
@@ -219,18 +185,30 @@ public class ScheduleService(
         return occupied != null; 
     }
 
-    public async Task<FreeAppointmentsCheckDto> DeleteAppointmentByBarber(Guid barberid, DateTime selectedDate, CancellationToken cancellationToken)
+     public async Task<string> DeleteAppointmentByAppointmentIdAsync(Guid appointmentId, CancellationToken cancellationToken)
     {
+        try
+        {
+            var appointment = await dbContext.Appointments.FirstOrDefaultAsync(x=> x.Id == appointmentId, cancellationToken);
+            if (appointment == null)
+            {
+                throw new Exception("Nije pronadjen termin za brisanje!");
+            }
+            dbContext.Appointments.Remove(appointment);
+            await dbContext.SaveChangesAsync(cancellationToken);
+
+            return "Uspešno obrisan termin!";
+
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            Console.WriteLine(e);
+            throw;
+        }
         
-        var appointmentToDelete = dbContext.Appointments.FirstOrDefault(x => x.Barberid == barberid && x.Time == selectedDate);
-        if(appointmentToDelete == null) return null;
         
-        dbContext.Appointments.Remove(appointmentToDelete);
-        await dbContext.SaveChangesAsync(cancellationToken);
-
-
-        return new FreeAppointmentsCheckDto(barberid,  selectedDate);
-
+        
     }
     
     

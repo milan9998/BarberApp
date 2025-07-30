@@ -9,8 +9,7 @@ public interface IScheduleService
         CancellationToken cancellationToken
         );
 
-    Task<FreeAppointmentsCheckDto> DeleteAppointmentByBarber(Guid barberid, DateTime selectedDate,
-        CancellationToken cancellationToken);
+    Task<string> DeleteAppointmentByAppointmentIdAsync(Guid appointmentId, CancellationToken cancellationToken);
     Task<List<GetAllUsedAppointmentsDto>> GetAllSchedulesByBarberIdAsync(
         Guid barberId, CancellationToken cancellationToken);
 

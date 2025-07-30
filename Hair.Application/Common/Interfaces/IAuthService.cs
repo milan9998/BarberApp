@@ -17,4 +17,9 @@ public interface IAuthService
 
     Task<AssignCompanyOwnerDto> AssignCompanyOwnerAsync(AssignCompanyOwnerDto assignCompanyOwnerDto,
         CancellationToken cancellationToken);
+
+    Task<List<GetAllAppointmentsByUserIdDto>> GetAllAppointmentsByUserIdAsync(string userId,
+        CancellationToken cancellationToken);
+
+    Task<string> UpdateCompanyOwnerAsync(UpdateOwnerDto updateOwnerDto, CancellationToken cancellationToken);
 }

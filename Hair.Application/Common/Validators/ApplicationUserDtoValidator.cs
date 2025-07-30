@@ -12,13 +12,16 @@ public class ApplicationUserDtoValidator : AbstractValidator<RegisterDto>
     public ApplicationUserDtoValidator(IBarberService barberService)
     {
         _barberService = barberService;
-        RuleFor(x => x.LastName).NotEmpty();
-        RuleFor(x => x.FirstName).NotEmpty();
+        
+        RuleFor(x => x.LastName).NotEmpty()
+            .WithMessage("Prezime ne sme biti prazno!");
+        RuleFor(x => x.FirstName).NotEmpty()
+            .WithMessage("Ime ne sme biti prazno!");
         RuleFor(x=>x.PhoneNumber)
             .Must(phone => _barberService.IsValidSerbianPhoneNumber(phone))
-            .WithMessage("Invalid phone number format!");
-        RuleFor(x => x.Email).Must(mail => barberService.IsValidEmail(mail)).WithMessage("Invalid email format!");
-            
+            .WithMessage("Nevažeci format broja telefona!");
+        RuleFor(x => x.Email).Must(mail => barberService.IsValidEmail(mail))
+            .WithMessage("Nevažeći format email adrese!");
         
     }
 }

@@ -17,17 +17,17 @@ public class ScheduleAppointmentCreateDtoValidator : AbstractValidator<ScheduleA
         _barberService = barberService;
 
         RuleFor(x => x.time)
-            .GreaterThan(DateTime.UtcNow).WithMessage("You cannot schedule an appointment in the past");
+            .GreaterThan(DateTime.Now).WithMessage("Ne možete zakazati termin u prošlosti");
 
         RuleFor(x => x.time.Minute)
-            .Must(m => m % 30 == 0).WithMessage("Appointments must be scheduled in 30-minute intervals");
-
-       
+            .Must(m => m % 30 == 0).WithMessage("Termini moraju biti zakazani u intervalima od 30 minuta");
+        
         RuleFor(x => x.phoneNumber)
             .Must(phone => _barberService.IsValidSerbianPhoneNumber(phone))
-            .WithMessage("Invalid phone number format!");
-        RuleFor(x => x.email).Must(mail => barberService.IsValidEmail(mail)).WithMessage("Invalid email format!");
-
+            .WithMessage("Nevažeći format broja telefona!");
+        
+        RuleFor(x => x.email).Must(mail => barberService.IsValidEmail(mail))
+            .WithMessage("Nevažeći format email adrese!");
     }
 
     

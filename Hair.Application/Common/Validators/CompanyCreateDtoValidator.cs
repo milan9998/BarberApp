@@ -9,9 +9,12 @@ public class CompanyCreateDtoValidator : AbstractValidator<CompanyCreateDto>
     public CompanyCreateDtoValidator()
     {
         
-        RuleFor(x => x.CompanyName).NotEmpty();
-        RuleFor(x=> x.CompanyName).MinimumLength(3);
-        RuleFor(x=> x.CompanyName).MaximumLength(30);
+        RuleFor(x => x.CompanyName).NotEmpty()
+            .WithMessage("Naziv kompanije ne sme biti prazno!");
+        RuleFor(x=> x.CompanyName).MinimumLength(3)
+            .WithMessage("Naziv kompanije mora imati minimum 3 karaktera!");
+        RuleFor(x=> x.CompanyName).MaximumLength(30)
+            .WithMessage("Naziv kompanije ne sme imati više od 30 karaktera!");
         
     }
 }
