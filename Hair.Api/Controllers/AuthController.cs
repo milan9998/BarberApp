@@ -1,14 +1,23 @@
 ﻿using Hair.Application.Auth.Commands;
 using Hair.Application.Auth.Queries;
+using Hair.Application.Common.Configuration;
 using Hair.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Hair.Api.Controllers;
 [ApiController]
 [Route("auth")]
 public class AuthController : ApiBaseController
 {
+    private readonly AppUrlSettings _appUrls;
+
+    public AuthController(IOptions<AppUrlSettings> appUrls)
+    {
+        _appUrls = appUrls.Value;
+    }
+
     [HttpGet("test/conflict")]
     public IActionResult TestConflict()
     {
@@ -25,6 +34,23 @@ public class AuthController : ApiBaseController
     public async Task<IActionResult> Register([FromForm] RegisterCommand registerCommand)
     {
         return Ok(await Mediator.Send(registerCommand));
+    }
+
+    [HttpGet("verify-email")]
+    [AllowAnonymous]
+    public async Task<IActionResult> VerifyEmail([FromQuery] string userId, [FromQuery] string token)
+    {
+        var frontendBase = _appUrls.FrontendBaseUrl.TrimEnd('/');
+
+        try
+        {
+            var message = await Mediator.Send(new VerifyEmailCommand(userId, token));
+            return Redirect($"{frontendBase}/verify-email?status=success&message={Uri.EscapeDataString(message)}");
+        }
+        catch (Exception ex)
+        {
+            return Redirect($"{frontendBase}/verify-email?status=error&message={Uri.EscapeDataString(ex.Message)}");
+        }
     }
 
     [HttpPost("createCompanyOwner")]

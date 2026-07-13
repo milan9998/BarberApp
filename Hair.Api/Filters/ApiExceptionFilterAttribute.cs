@@ -21,8 +21,26 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
             { typeof(NotFoundException), HandleNotFoundException },
             { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
             { typeof(AppointmentConflictException), HandleAppointmentConflictException },
-            {typeof(AppointmentConsecutiveException), AppointmentConsecutiveException }
+            { typeof(AppointmentConsecutiveException), AppointmentConsecutiveException },
+            { typeof(BadRequestException), HandleBadRequestException }
         };
+    }
+
+    private void HandleBadRequestException(ExceptionContext context)
+    {
+        var details = new ProblemDetails
+        {
+            Title = "Neispravan zahtev",
+            Detail = context.Exception.Message,
+            Status = StatusCodes.Status400BadRequest
+        };
+
+        context.Result = new ObjectResult(details)
+        {
+            StatusCode = StatusCodes.Status400BadRequest
+        };
+
+        context.ExceptionHandled = true;
     }
 
     private void AppointmentConsecutiveException(ExceptionContext context)
@@ -88,7 +106,8 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         var details = new ProblemDetails
         {
             Status = StatusCodes.Status500InternalServerError,
-            Title = "An error occurred while processing your request.",
+            Title = "Greška na serveru",
+            Detail = context.Exception.Message,
             Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1"
         };
 
@@ -140,6 +159,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         {
             Status = StatusCodes.Status401Unauthorized,
             Title = "Unauthorized",
+            Detail = context.Exception.Message,
             Type = "https://tools.ietf.org/html/rfc7235#section-3.1"
         };
 

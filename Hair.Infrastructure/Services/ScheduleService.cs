@@ -7,16 +7,16 @@ using Hair.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Twilio.TwiML.Voice;
 using ValidationException = FluentValidation.ValidationException;
 
 namespace Hair.Infrastructure.Services;
 
 public class ScheduleService(
-    IHairDbContext dbContext,UserManager<ApplicationUser> userManager,
-    ILogger<ScheduleService> _logger) : IScheduleService
+    IHairDbContext dbContext,
+    UserManager<ApplicationUser> userManager,
+    ILogger<ScheduleService> _logger,
+    IEmailService emailService) : IScheduleService
 {
-
     public async Task<ScheduleAppointmentResponseDto> CreateScheduleAppointmentAsync(ScheduleAppointmentCreateDto schedule, CancellationToken cancellationToken)
     {
 
@@ -26,13 +26,20 @@ public class ScheduleService(
             bool isWithinWorkHours = await IsWithinBarberWorkHours(schedule, cancellationToken);
             if (!isWithinWorkHours)
             {
-                throw new Exception("Barber is not available during the requested time.");
+                throw new BadRequestException("Frizer nije dostupan u izabranom terminu.");
             }
 
             var userExists = await userManager.FindByEmailAsync(schedule.email);
             if (userExists is null)
             {
-                throw new AppointmentConflictException("Morate biti ulogovani da bi ste zakazali tretman.");
+                throw new BadRequestException(
+                    "Morate imati registrovan nalog sa ovim emailom da biste zakazali. Registrujte se i verifikujte email.");
+            }
+
+            if (!userExists.EmailConfirmed)
+            {
+                throw new BadRequestException(
+                    "Email nije verifikovan. Potvrdite nalog pre zakazivanja (proverite inbox).");
             }
             
             DateTime normalizedTime = new DateTime(
@@ -49,12 +56,16 @@ public class ScheduleService(
             var isAvailableCheck = await IsAppointmentAvailable(schedule.barberId, normalizedTime, cancellationToken);
             if (isAvailableCheck)
             {
-                throw new AppointmentConflictException("Schedule appointment already exists.");
+                throw new AppointmentConflictException("Ovaj termin je već zauzet. Izaberite drugi.");
 
             }
 
             var haircut = await dbContext.Haircuts.Where(x => x.Id == schedule.haircutId)
                 .FirstOrDefaultAsync(cancellationToken);
+            if (haircut is null)
+            {
+                throw new BadRequestException("Izabrana usluga nije pronađena.");
+            }
             decimal haircutDuration = haircut.Duration;
             int requiredSlots = (int)Math.Ceiling(haircutDuration / 30m);
 
@@ -62,7 +73,7 @@ public class ScheduleService(
             bool canSchedule = await CanSchedule(userExists.PhoneNumber, schedule.time);
             if (!canSchedule)
             {
-                throw new AppointmentConflictException("Možete zakazati termin samo jednom u 7 dana.");
+                throw new BadRequestException("Možete zakazati termin samo jednom u 7 dana.");
             }
             var allFreeAppointments =
                 await GetAllFreeAppointmentsQuery(schedule.time.Date, schedule.barberId, cancellationToken);
@@ -118,6 +129,17 @@ public class ScheduleService(
                 dbContext.Appointments.Add(appointment);
             }
             await dbContext.SaveChangesAsync(cancellationToken);
+
+            var barber = await dbContext.Barbers
+                .FirstOrDefaultAsync(x => x.BarberId == schedule.barberId, cancellationToken);
+
+            await SendBookingEmailsAsync(
+                userExists,
+                barber,
+                haircut.HaircutType,
+                bookedAppointmentsTimes[0],
+                cancellationToken);
+
             return new ScheduleAppointmentResponseDto(userExists.FirstName, userExists.LastName, userExists.Email,
                 userExists.PhoneNumber, bookedAppointmentsTimes[0], schedule.barberId, haircut.HaircutType);
         }
@@ -243,5 +265,67 @@ public class ScheduleService(
         var list2 = list.Select(time => new FreeAppointmentsCheckDto(barberId, time)).ToList();
 
         return list2;
+    }
+
+    private async Task SendBookingEmailsAsync(
+        ApplicationUser client,
+        Barber? barber,
+        string haircutName,
+        DateTime appointmentTime,
+        CancellationToken cancellationToken)
+    {
+        var timeLabel = appointmentTime.ToString("dd.MM.yyyy. HH:mm");
+
+        try
+        {
+            var clientHtml = $"""
+                <div style="font-family:Arial,sans-serif;line-height:1.55;color:#1d2a3f">
+                  <h2>Termin je uspešno zakazan</h2>
+                  <p>Zdravo {client.FirstName},</p>
+                  <p>Vaš termin je potvrđen.</p>
+                  <ul>
+                    <li><strong>Usluga:</strong> {haircutName}</li>
+                    <li><strong>Frizer:</strong> {barber?.BarberName ?? "-"}</li>
+                    <li><strong>Termin:</strong> {timeLabel}</li>
+                  </ul>
+                  <p>Vidimo se u salonu.</p>
+                  <p style="color:#6a7f9f;font-size:12px">Barber Control HQ</p>
+                </div>
+                """;
+
+            await emailService.SendAsync(
+                client.Email!,
+                $"Potvrda termina - {timeLabel}",
+                clientHtml,
+                cancellationToken);
+
+            if (!string.IsNullOrWhiteSpace(barber?.Email))
+            {
+                var barberHtml = $"""
+                    <div style="font-family:Arial,sans-serif;line-height:1.55;color:#1d2a3f">
+                      <h2>Nova rezervacija</h2>
+                      <p>Zakazan je novi termin kod vas.</p>
+                      <ul>
+                        <li><strong>Klijent:</strong> {client.FirstName} {client.LastName}</li>
+                        <li><strong>Email:</strong> {client.Email}</li>
+                        <li><strong>Telefon:</strong> {client.PhoneNumber}</li>
+                        <li><strong>Usluga:</strong> {haircutName}</li>
+                        <li><strong>Termin:</strong> {timeLabel}</li>
+                      </ul>
+                      <p style="color:#6a7f9f;font-size:12px">Barber Control HQ</p>
+                    </div>
+                    """;
+
+                await emailService.SendAsync(
+                    barber.Email,
+                    $"Nova rezervacija - {client.FirstName} {client.LastName} ({timeLabel})",
+                    barberHtml,
+                    cancellationToken);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Booking emails failed for appointment at {Time}", appointmentTime);
+        }
     }
 }

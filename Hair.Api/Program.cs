@@ -34,7 +34,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins(
+                "http://localhost:4200",
+                "https://barbercontrolhq.com",
+                "https://www.barbercontrolhq.com")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -90,7 +93,17 @@ using (var scope = app.Services.CreateScope())
     });
 });*/
 
-app.UseStaticFiles();
+app.UseDefaultFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        // Avoid Cloudflare/browser serving a stale SPA while iterating on branding.
+        ctx.Context.Response.Headers.CacheControl = "no-cache, no-store, must-revalidate";
+        ctx.Context.Response.Headers.Pragma = "no-cache";
+        ctx.Context.Response.Headers.Expires = "0";
+    }
+});
 
 if (app.Environment.IsDevelopment())
 {
@@ -98,12 +111,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Cloudflare tunnel hits the API over plain HTTP on localhost — skip HTTPS redirect in Development.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
-app.UseHttpsRedirection();
-app.MapControllers();
 app.UseCors("AllowFrontend");
+app.MapControllers();
 
-
+// Serve Angular SPA for non-API routes (Cloudflare front can use same port as API).
+app.MapFallbackToFile("index.html");
 
 app.Run();
 /*

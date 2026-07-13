@@ -28,8 +28,8 @@ public class BarberService (IHairDbContext dbContext,UserManager<ApplicationUser
                 PhoneNumber = barberCreateDto.phoneNumber,
                 FirstName = barberCreateDto.barberName,
                 LastName = barberCreateDto.barberName,
-                //CompanyId = barberCreateDto.companyId,
-                Role = Role.Barber
+                Role = Role.Barber,
+                EmailConfirmed = true
             };
             var result = await userManager.CreateAsync(applicationUser, barberCreateDto.password);
             if (!result.Succeeded)

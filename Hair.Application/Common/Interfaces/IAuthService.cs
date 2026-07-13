@@ -8,7 +8,9 @@ public interface IAuthService
     Task<AuthResponseDto> Login(LoginDto loginDto, CancellationToken cancellationToken);
 
     Task<List<CompanyDetailsDto>> GetCompaniesByOwnerEmailAsync(string email, CancellationToken cancellationToken);
-    Task<AuthLevelDto> RegisterAsync(RegisterDto registerDto, CancellationToken cancellationToken);
+    Task<RegisterResponseDto> RegisterAsync(RegisterDto registerDto, CancellationToken cancellationToken);
+
+    Task<string> VerifyEmailAsync(string userId, string token, CancellationToken cancellationToken);
 
     Task<CompanyOwnerResponseDto> CreateCompanyOwnerAsync(CompanyOwnerDto companyOwnerDto,
         CancellationToken cancellationToken);
