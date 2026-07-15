@@ -3,6 +3,7 @@ using Hair.Application.Schedules.Commands;
 using Hair.Application.Schedules.Queries;
 using Hair.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hair.Api.Controllers;
 [ApiController]
@@ -14,6 +15,83 @@ public class ScheduleController: ApiBaseController
     public ScheduleController(IHairDbContext dbContext)
     {
         _dbContext = dbContext;
+    }
+
+    /// <summary>
+    /// Owner CRM: booking stats for one company (per barber + recent list + last 6 months).
+    /// </summary>
+    [HttpGet("company-crm")]
+    public async Task<IActionResult> GetCompanyCrm([FromQuery] Guid companyId, CancellationToken cancellationToken)
+    {
+        var barbers = await _dbContext.Barbers
+            .AsNoTracking()
+            .Where(b => b.Company != null && b.Company.Id == companyId)
+            .Select(b => new { b.BarberId, b.BarberName, b.Email, b.PhoneNumber })
+            .ToListAsync(cancellationToken);
+
+        var barberIds = barbers.Select(b => b.BarberId).ToList();
+        var now = DateTime.UtcNow;
+        var fromMonth = new DateTime(now.Year, now.Month, 1, 0, 0, 0, DateTimeKind.Utc).AddMonths(-5);
+
+        var appointments = barberIds.Count == 0
+            ? new List<Appointment>()
+            : await _dbContext.Appointments
+                .AsNoTracking()
+                .Where(a => barberIds.Contains(a.Barberid))
+                .OrderByDescending(a => a.Time)
+                .ToListAsync(cancellationToken);
+
+        var perBarber = barbers.Select(b =>
+        {
+            var barberAppts = appointments.Where(a => a.Barberid == b.BarberId).ToList();
+            var upcoming = barberAppts.Count(a => a.Time >= now);
+            var past = barberAppts.Count(a => a.Time < now);
+            return new
+            {
+                barberId = b.BarberId,
+                barberName = b.BarberName,
+                email = b.Email,
+                phoneNumber = b.PhoneNumber,
+                total = barberAppts.Count,
+                upcoming,
+                completed = past
+            };
+        }).OrderByDescending(x => x.total).ToList();
+
+        var byMonth = Enumerable.Range(0, 6)
+            .Select(offset =>
+            {
+                var monthStart = fromMonth.AddMonths(offset);
+                var count = appointments.Count(a => a.Time.Year == monthStart.Year && a.Time.Month == monthStart.Month);
+                return new { year = monthStart.Year, month = monthStart.Month, count };
+            })
+            .ToList();
+
+        var recent = appointments.Take(25).Select(a =>
+        {
+            var barber = barbers.FirstOrDefault(b => b.BarberId == a.Barberid);
+            return new
+            {
+                appointmentId = a.Id,
+                barberId = a.Barberid,
+                barberName = barber?.BarberName ?? "—",
+                time = a.Time,
+                haircutName = a.HaircutName,
+                isUpcoming = a.Time >= now
+            };
+        }).ToList();
+
+        return Ok(new
+        {
+            companyId,
+            totalAppointments = appointments.Count,
+            upcomingAppointments = appointments.Count(a => a.Time >= now),
+            completedAppointments = appointments.Count(a => a.Time < now),
+            barberCount = barbers.Count,
+            perBarber,
+            byMonth,
+            recent
+        });
     }
     
     [HttpGet("appointments-per-month")]

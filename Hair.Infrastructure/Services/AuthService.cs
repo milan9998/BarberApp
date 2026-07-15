@@ -1,4 +1,4 @@
-﻿using EnumsNET;
+using EnumsNET;
 using Hair.Application.Common.Configuration;
 using Hair.Application.Common.Dto.Auth;
 using Hair.Application.Common.Dto.Company;
@@ -22,7 +22,8 @@ public class AuthService(
     IHairDbContext dbContext,
     ILogger<AuthService> _logger,
     IEmailService emailService,
-    IOptions<AppUrlSettings> appUrlOptions) : IAuthService
+    IOptions<AppUrlSettings> appUrlOptions,
+    IAppLocalizer localizer) : IAuthService
 {
     private readonly AppUrlSettings _appUrls = appUrlOptions.Value;
 
@@ -33,19 +34,24 @@ public class AuthService(
             var user = await userManager.FindByEmailAsync(loginDto.Email);
             if (user == null || user.Email != loginDto.Email)
             {
-                throw new BadRequestException("Pogrešan email ili lozinka.");
+                throw new BadRequestException(localizer.T(
+                    "Incorrect email or password.",
+                    "Pogrešan email ili lozinka."));
             }
 
             if (!user.EmailConfirmed)
             {
-                throw new BadRequestException(
-                    "Email nije verifikovan. Otvorite inbox, kliknite na verifikacioni link, pa se tek onda prijavite.");
+                throw new BadRequestException(localizer.T(
+                    "Email is not verified. Open your inbox, click the verification link, then log in.",
+                    "Email nije verifikovan. Otvorite inbox, kliknite na verifikacioni link, pa se tek onda prijavite."));
             }
         
             var password = await userManager.CheckPasswordAsync(user, loginDto.Password);
             if (!password)
             {
-                throw new BadRequestException("Pogrešan email ili lozinka.");
+                throw new BadRequestException(localizer.T(
+                    "Incorrect email or password.",
+                    "Pogrešan email ili lozinka."));
             }
             var barberId = await dbContext.Barbers.FirstOrDefaultAsync(x=>x.ApplicationUserId == user.Id, cancellationToken);
         
@@ -164,13 +170,13 @@ public class AuthService(
                 throw new Exception(errorMsg);
             }
 
-            //company.CompanyOwnerId = appUser.Id;
-            //      company.CompanyOwnerId = comapnyExistcheck.CompanyId.ToString();
+            await userManager.AddToRoleAsync(appUser, nameof(Role.CompanyOwner));
+
             var appUserCompany = new ApplicationUserCompany()
             {
                 CompanyId = companyOwnerDto.CompanyId,
                 ApplicationUserId = appUser.Id,
-                Id = new Guid()
+                Id = Guid.NewGuid()
             };
             await dbContext.ApplicationUserCompany.AddAsync(appUserCompany, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
@@ -227,11 +233,15 @@ public class AuthService(
         try
         {
             if (dto.Password != dto.ConfirmPassword)
-                throw new BadRequestException("Lozinke se ne poklapaju.");
+                throw new BadRequestException(localizer.T(
+                    "Passwords do not match.",
+                    "Lozinke se ne poklapaju."));
 
             var existingUser = await userManager.FindByEmailAsync(dto.Email);
             if (existingUser != null)
-                throw new BadRequestException("Korisnik sa ovim emailom već postoji.");
+                throw new BadRequestException(localizer.T(
+                    "A user with this email already exists.",
+                    "Korisnik sa ovim emailom već postoji."));
 
             var user = new ApplicationUser
             {
@@ -247,7 +257,7 @@ public class AuthService(
             var result = await userManager.CreateAsync(user, dto.Password);
             if (!result.Succeeded)
             {
-                var errorMsg = string.Join(", ", result.Errors.Select(e => e.Description));
+                var errorMsg = string.Join("\n", result.Errors.Select(LocalizeIdentityError));
                 throw new BadRequestException(errorMsg);
             }
 
@@ -260,12 +270,50 @@ public class AuthService(
                 $"{_appUrls.ApiBaseUrl.TrimEnd('/')}/auth/verify-email?userId={Uri.EscapeDataString(user.Id)}&token={encodedToken}";
 
             var html = $"""
-                <div style="font-family:Arial,sans-serif;line-height:1.5;color:#1d2a3f">
-                  <h2>Potvrdite nalog</h2>
-                  <p>Zdravo {user.FirstName},</p>
-                  <p>Hvala na registraciji na Barber Control HQ. Kliknite na dugme ispod da verifikujete email.</p>
-                  <p><a href="{verifyUrl}" style="display:inline-block;padding:12px 18px;background:#1f4f96;color:#fff;text-decoration:none;border-radius:8px">Verifikuj email</a></p>
-                  <p>Ili otvorite ovaj link:<br/><a href="{verifyUrl}">{verifyUrl}</a></p>
+                <div style="margin:0;padding:0;background:#0a0a0a;font-family:Arial,Helvetica,sans-serif">
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#0a0a0a;padding:28px 12px">
+                    <tr>
+                      <td align="center">
+                        <table role="presentation" width="560" cellspacing="0" cellpadding="0" style="max-width:560px;background:#111111;border:1px solid #2a2a2a">
+                          <tr>
+                            <td style="height:6px;background:#c8102e;font-size:0;line-height:0">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td style="padding:28px 28px 8px;color:#ffffff;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700">
+                              Barber Control Headquarters
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:8px 28px 0;color:#ffffff;font-size:28px;line-height:1.2;font-weight:700">
+                              Potvrdite nalog
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:14px 28px 0;color:#cfcfcf;font-size:15px;line-height:1.65">
+                              Zdravo {user.FirstName},
+                              <br/><br/>
+                              Hvala na registraciji. Otvorite dugme ispod da verifikujete email i otključate prijavu.
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:24px 28px 8px" align="left">
+                              <a href="{verifyUrl}"
+                                 style="display:inline-block;padding:14px 22px;background:#c8102e;color:#ffffff;text-decoration:none;font-size:14px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">
+                                Verifikuj email
+                              </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:12px 28px 28px;color:#9a9a9a;font-size:12px;line-height:1.6">
+                              Ako dugme ne radi, otvorite ovaj link:
+                              <br/>
+                              <a href="{verifyUrl}" style="color:#ffffff;word-break:break-all">{verifyUrl}</a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
                 """;
 
@@ -280,13 +328,16 @@ public class AuthService(
             catch (Exception emailEx)
             {
                 _logger.LogError(emailEx, "Verification email failed for {Email}", user.Email);
-                throw new BadRequestException(
-                    "Nalog je kreiran, ali verifikacioni email nije poslat. Proverite SMTP podešavanja ili kontaktirajte admina.");
+                throw new BadRequestException(localizer.T(
+                    "Account was created, but the verification email could not be sent. Check SMTP settings or contact an admin.",
+                    "Nalog je kreiran, ali verifikacioni email nije poslat. Proverite SMTP podešavanja ili kontaktirajte admina."));
             }
 
             return new RegisterResponseDto(
                 user.Email!,
-                "Nalog je kreiran. Poslali smo vam email za verifikaciju. Otvorite inbox, kliknite na link, pa se tek onda prijavite.",
+                localizer.T(
+                    "Account created. We sent you a verification email. Open your inbox, click the link, then log in.",
+                    "Nalog je kreiran. Poslali smo vam email za verifikaciju. Otvorite inbox, kliknite na link, pa se tek onda prijavite."),
                 true);
         }
         catch (BadRequestException)
@@ -305,12 +356,16 @@ public class AuthService(
         var user = await userManager.FindByIdAsync(userId);
         if (user is null)
         {
-            throw new Exception("Korisnik nije pronađen.");
+            throw new Exception(localizer.T(
+                "User was not found.",
+                "Korisnik nije pronađen."));
         }
 
         if (user.EmailConfirmed)
         {
-            return "Email je već verifikovan.";
+            return localizer.T(
+                "Email is already verified.",
+                "Email je već verifikovan.");
         }
 
         string decodedToken;
@@ -320,18 +375,47 @@ public class AuthService(
         }
         catch
         {
-            throw new Exception("Neispravan verifikacioni token.");
+            throw new Exception(localizer.T(
+                "Invalid verification token.",
+                "Neispravan verifikacioni token."));
         }
 
         var result = await userManager.ConfirmEmailAsync(user, decodedToken);
         if (!result.Succeeded)
         {
-            var errorMsg = string.Join(", ", result.Errors.Select(e => e.Description));
-            throw new Exception($"Verifikacija nije uspela: {errorMsg}");
+            var errorMsg = string.Join("\n", result.Errors.Select(LocalizeIdentityError));
+            throw new Exception(localizer.T(
+                $"Verification failed: {errorMsg}",
+                $"Verifikacija nije uspela: {errorMsg}"));
         }
 
-        return "Email je uspešno verifikovan. Možete se prijaviti.";
+        return localizer.T(
+            "Email verified successfully. You can log in.",
+            "Email je uspešno verifikovan. Možete se prijaviti.");
     }
+
+    private string LocalizeIdentityError(IdentityError error) => error.Code switch
+    {
+        "PasswordTooShort" => localizer.T(
+            "Password must be at least 6 characters.",
+            "Lozinka mora imati najmanje 6 karaktera."),
+        "PasswordRequiresDigit" => localizer.T(
+            "Password must have at least one digit (0-9).",
+            "Lozinka mora imati najmanje jednu cifru (0-9)."),
+        "PasswordRequiresUpper" => localizer.T(
+            "Password must have at least one uppercase letter (A-Z).",
+            "Lozinka mora imati najmanje jedno veliko slovo (A-Z)."),
+        "PasswordRequiresLower" => localizer.T(
+            "Password must have at least one lowercase letter (a-z).",
+            "Lozinka mora imati najmanje jedno malo slovo (a-z)."),
+        "PasswordRequiresNonAlphanumeric" => localizer.T(
+            "Password must have at least one special character (!@#$...).",
+            "Lozinka mora imati najmanje jedan specijalan karakter (!@#$...)."),
+        "DuplicateUserName" or "DuplicateEmail" => localizer.T(
+            "A user with this email already exists.",
+            "Korisnik sa ovim emailom već postoji."),
+        _ => error.Description
+    };
 
     public async Task<string> UpdateCompanyOwnerAsync(UpdateOwnerDto updateOwnerDto, CancellationToken cancellationToken)
     {

@@ -1,4 +1,4 @@
-﻿using Hair.Application.Common.Configuration;
+using Hair.Application.Common.Configuration;
 using Hair.Application.Common.Interfaces;
 using Hair.Infrastructure.Context;
 using Hair.Infrastructure.Services;
@@ -24,6 +24,8 @@ public static class DependencyInjection
         services.AddScoped<IAdminSeederService, AdminSeederService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IOwnerService, OwnerService>();
+        services.AddHttpContextAccessor();
+        services.AddScoped<IAppLocalizer, AppLocalizer>();
         
         return services;
     }

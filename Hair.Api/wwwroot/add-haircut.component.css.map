@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/add-haircut/add-haircut.component.css"],
+  "sourcesContent": [".form-card {\r\n  max-width: 760px;\r\n  margin: 0 auto;\r\n}\r\n"],
+  "mappings": ";AAAA,CAAC;AACC,aAAW;AACX,UAAQ,EAAE;AACZ;",
+  "names": []
+}

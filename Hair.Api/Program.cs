@@ -36,6 +36,7 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
                 "http://localhost:4200",
+                "http://127.0.0.1:4200",
                 "https://barbercontrolhq.com",
                 "https://www.barbercontrolhq.com")
             .AllowAnyHeader()
@@ -71,10 +72,12 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
-    var adminSeeder = scope.ServiceProvider.GetRequiredService<IAdminSeederService>();
-    await adminSeeder.SeedAdminAsync();
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     await AdminSeederService.SeedRolesAsync(roleManager);
+    var adminSeeder = scope.ServiceProvider.GetRequiredService<IAdminSeederService>();
+    await adminSeeder.SeedAdminAsync();
+    await adminSeeder.SeedDemoOwnerAsync();
+    await adminSeeder.SeedDemoCrmAsync();
 }
 
 /*app.UseExceptionHandler(errorApp =>

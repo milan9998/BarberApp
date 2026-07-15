@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/platform-services/platform-services.component.css"],
+  "sourcesContent": ["/* Page layout styles live in src/styles.css (dark Barbercrop system). */\r\n:host {\r\n  display: block;\r\n}\r\n"],
+  "mappings": ";AACA;AACE,WAAS;AACX;",
+  "names": []
+}

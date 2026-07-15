@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using Hair.Application.Common.Dto.Schedule;
 using Hair.Application.Common.Exceptions;
@@ -15,7 +15,8 @@ public class ScheduleService(
     IHairDbContext dbContext,
     UserManager<ApplicationUser> userManager,
     ILogger<ScheduleService> _logger,
-    IEmailService emailService) : IScheduleService
+    IEmailService emailService,
+    IAppLocalizer localizer) : IScheduleService
 {
     public async Task<ScheduleAppointmentResponseDto> CreateScheduleAppointmentAsync(ScheduleAppointmentCreateDto schedule, CancellationToken cancellationToken)
     {
@@ -26,20 +27,24 @@ public class ScheduleService(
             bool isWithinWorkHours = await IsWithinBarberWorkHours(schedule, cancellationToken);
             if (!isWithinWorkHours)
             {
-                throw new BadRequestException("Frizer nije dostupan u izabranom terminu.");
+                throw new BadRequestException(localizer.T(
+                    "The barber is not available at the selected time.",
+                    "Frizer nije dostupan u izabranom terminu."));
             }
 
             var userExists = await userManager.FindByEmailAsync(schedule.email);
             if (userExists is null)
             {
-                throw new BadRequestException(
-                    "Morate imati registrovan nalog sa ovim emailom da biste zakazali. Registrujte se i verifikujte email.");
+                throw new BadRequestException(localizer.T(
+                    "You must have a registered account with this email to book. Register and verify your email.",
+                    "Morate imati registrovan nalog sa ovim emailom da biste zakazali. Registrujte se i verifikujte email."));
             }
 
             if (!userExists.EmailConfirmed)
             {
-                throw new BadRequestException(
-                    "Email nije verifikovan. Potvrdite nalog pre zakazivanja (proverite inbox).");
+                throw new BadRequestException(localizer.T(
+                    "Email is not verified. Confirm your account before booking (check your inbox).",
+                    "Email nije verifikovan. Potvrdite nalog pre zakazivanja (proverite inbox)."));
             }
             
             DateTime normalizedTime = new DateTime(
@@ -56,7 +61,9 @@ public class ScheduleService(
             var isAvailableCheck = await IsAppointmentAvailable(schedule.barberId, normalizedTime, cancellationToken);
             if (isAvailableCheck)
             {
-                throw new AppointmentConflictException("Ovaj termin je već zauzet. Izaberite drugi.");
+                throw new AppointmentConflictException(localizer.T(
+                    "This slot is already taken. Please choose another one.",
+                    "Ovaj termin je već zauzet. Izaberite drugi."));
 
             }
 
@@ -64,7 +71,9 @@ public class ScheduleService(
                 .FirstOrDefaultAsync(cancellationToken);
             if (haircut is null)
             {
-                throw new BadRequestException("Izabrana usluga nije pronađena.");
+                throw new BadRequestException(localizer.T(
+                    "Selected service was not found.",
+                    "Izabrana usluga nije pronađena."));
             }
             decimal haircutDuration = haircut.Duration;
             int requiredSlots = (int)Math.Ceiling(haircutDuration / 30m);
@@ -73,7 +82,9 @@ public class ScheduleService(
             bool canSchedule = await CanSchedule(userExists.PhoneNumber, schedule.time);
             if (!canSchedule)
             {
-                throw new BadRequestException("Možete zakazati termin samo jednom u 7 dana.");
+                throw new BadRequestException(localizer.T(
+                    "You can book only once every 7 days.",
+                    "Možete zakazati termin samo jednom u 7 dana."));
             }
             var allFreeAppointments =
                 await GetAllFreeAppointmentsQuery(schedule.time.Date, schedule.barberId, cancellationToken);
@@ -85,7 +96,9 @@ public class ScheduleService(
            
             if (!freeTimes.Contains(currentCheckTime))
             {
-                throw new ValidationException("The requested start time is not available.");
+                throw new ValidationException(localizer.T(
+                    "The requested start time is not available.",
+                    "Izabrani početni termin nije dostupan."));
             }
 
             if (requiredSlots <= 1)
@@ -116,8 +129,9 @@ public class ScheduleService(
 
             if (!foundConsecutiveSlots && bookedAppointmentsTimes.Count != requiredSlots)
             {
-                throw new AppointmentConsecutiveException(
-                    $"Nema dovoljno uzastopnih slobodnih termina za ovaj tretman koji ste izabrali  {haircutDuration}  minuta, izaberite drugi termin.");
+                throw new AppointmentConsecutiveException(localizer.T(
+                    $"There are not enough consecutive free slots for this {haircutDuration}-minute treatment. Please choose another time.",
+                    $"Nema dovoljno uzastopnih slobodnih termina za ovaj tretman koji ste izabrali {haircutDuration} minuta, izaberite drugi termin."));
             }
             foreach (var timeSlot in bookedAppointmentsTimes)
             {
